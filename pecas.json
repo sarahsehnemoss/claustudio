@@ -1,28 +1,48 @@
 [
   {
-    "id": "bae6035b",
-    "pasta": "fruteira-centro de mesa verde",
-    "nome": "fruteira-centro de mesa verde",
+    "id": "25dde2b2",
+    "pasta": "centro de mesa marrom-verde-azul mescla",
+    "nome": "centro de mesa marrom-verde-azul mescla",
     "categoria": "",
+    "material": "",
     "descricao": "",
     "preco": 0.0,
     "estoque": 1,
     "visivel": true,
+    "vendido": false,
     "fotos": [
-      "WhatsApp Image 2026-09-20 at 14.08.39.jpeg",
-      "WhatsApp Image 2026-09-20 at 14.08.41 (1).jpeg",
-      "WhatsApp Image 2026-09-20 at 14.08.41.jpeg"
+      "WhatsApp Image 2026-09-20 at 14.08.42.jpeg"
     ]
   },
   {
-    "id": "e806a4ff",
-    "pasta": "petisqueira bege",
-    "nome": "petisqueira bege",
+    "id": "f1feb551",
+    "pasta": "mesa posta concha/concha azul",
+    "nome": "mesa posta concha — concha azul",
     "categoria": "",
+    "material": "",
     "descricao": "",
     "preco": 0.0,
     "estoque": 1,
     "visivel": true,
+    "vendido": false,
+    "fotos": [
+      "WhatsApp Image 2026-09-20 at 14.12.47 (1).jpeg",
+      "WhatsApp Image 2026-09-20 at 14.12.48 (1).jpeg",
+      "WhatsApp Image 2026-09-20 at 14.12.48.jpeg",
+      "WhatsApp Image 2026-09-20 at 14.12.49.jpeg"
+    ]
+  },
+  {
+    "id": "561f0979",
+    "pasta": "petisqueira bege",
+    "nome": "petisqueira bege",
+    "categoria": "",
+    "material": "",
+    "descricao": "",
+    "preco": 0.0,
+    "estoque": 1,
+    "visivel": true,
+    "vendido": false,
     "fotos": [
       "WhatsApp Image 2026-09-20 at 14.09.01 (1).jpeg",
       "WhatsApp Image 2026-09-20 at 14.09.01.jpeg",
@@ -32,30 +52,16 @@
     ]
   },
   {
-    "id": "a8a4ac64",
-    "pasta": "mesa posta concha/concha azul",
-    "nome": "mesa posta concha — concha azul",
-    "categoria": "",
-    "descricao": "",
-    "preco": 0.0,
-    "estoque": 1,
-    "visivel": true,
-    "fotos": [
-      "WhatsApp Image 2026-09-20 at 14.12.47 (1).jpeg",
-      "WhatsApp Image 2026-09-20 at 14.12.48 (1).jpeg",
-      "WhatsApp Image 2026-09-20 at 14.12.48.jpeg",
-      "WhatsApp Image 2026-09-20 at 14.12.49.jpeg"
-    ]
-  },
-  {
-    "id": "4df4cd90",
+    "id": "d53280c3",
     "pasta": "mesa posta folha",
     "nome": "mesa posta folha",
     "categoria": "",
+    "material": "",
     "descricao": "",
     "preco": 0.0,
     "estoque": 1,
     "visivel": true,
+    "vendido": false,
     "fotos": [
       "WhatsApp Image 2026-09-20 at 14.12.40.jpeg",
       "WhatsApp Image 2026-09-20 at 14.12.41.jpeg",
@@ -64,99 +70,111 @@
     ]
   },
   {
-    "id": "3eb726b1",
-    "pasta": "centro de mesa costela adão grande",
-    "nome": "centro de mesa costela adão grande",
-    "categoria": "",
-    "descricao": "",
-    "preco": 0.0,
-    "estoque": 1,
-    "visivel": true,
-    "fotos": [
-      "WhatsApp Image 2026-09-20 at 14.12.47.jpeg"
-    ]
-  },
-  {
-    "id": "bfdea27d",
-    "pasta": "centro de mesa marrom-verde-azul mescla",
-    "nome": "centro de mesa marrom-verde-azul mescla",
-    "categoria": "",
-    "descricao": "",
-    "preco": 0.0,
-    "estoque": 1,
-    "visivel": true,
-    "fotos": [
-      "WhatsApp Image 2026-09-20 at 14.08.42.jpeg"
-    ]
-  },
-  {
-    "id": "f99df352",
+    "id": "db6c20da",
     "pasta": "vazo verde-marrom",
     "nome": "vazo verde-marrom",
     "categoria": "",
+    "material": "",
     "descricao": "",
     "preco": 0.0,
     "estoque": 1,
     "visivel": true,
+    "vendido": false,
     "fotos": [
       "WhatsApp Image 2026-09-20 at 14.08.46.jpeg",
       "WhatsApp Image 2026-09-20 at 14.08.54.jpeg"
     ]
   },
   {
-    "id": "3f8b9c03",
-    "pasta": "peça azul conha centro de mesa",
-    "nome": "peça azul conha centro de mesa",
+    "id": "0c9b90e1",
+    "pasta": "centro de mesa costela adão grande",
+    "nome": "centro de mesa costela adão grande",
     "categoria": "",
+    "material": "",
     "descricao": "",
     "preco": 0.0,
     "estoque": 1,
     "visivel": true,
+    "vendido": false,
     "fotos": [
-      "WhatsApp Image 2026-09-20 at 14.08.55 (1).jpeg",
-      "WhatsApp Image 2026-09-20 at 14.08.55.jpeg",
-      "WhatsApp Image 2026-09-20 at 14.08.56 (1).jpeg",
-      "WhatsApp Image 2026-09-20 at 14.08.56.jpeg",
-      "WhatsApp Image 2026-09-20 at 14.08.57.jpeg",
-      "WhatsApp Image 2026-09-20 at 14.08.58.jpeg"
+      "WhatsApp Image 2026-09-20 at 14.12.47.jpeg"
     ]
   },
   {
-    "id": "186d28bb",
-    "pasta": "conjunto centro de mesa folha azul",
-    "nome": "conjunto centro de mesa folha azul",
+    "id": "f0ab3090",
+    "pasta": "mesa posta verde-marrom",
+    "nome": "mesa posta verde-marrom",
     "categoria": "",
+    "material": "",
     "descricao": "",
     "preco": 0.0,
     "estoque": 1,
     "visivel": true,
+    "vendido": false,
+    "fotos": [
+      "WhatsApp Image 2026-09-20 at 14.12.46.jpeg"
+    ]
+  },
+  {
+    "id": "145bf604",
+    "pasta": "mesa posta concha/concha verde",
+    "nome": "mesa posta concha — concha verde",
+    "categoria": "",
+    "material": "",
+    "descricao": "",
+    "preco": 0.0,
+    "estoque": 1,
+    "visivel": true,
+    "vendido": false,
+    "fotos": [
+      "WhatsApp Image 2026-09-20 at 14.09.05.jpeg",
+      "WhatsApp Image 2026-09-20 at 14.09.11.jpeg"
+    ]
+  },
+  {
+    "id": "431f3073",
+    "pasta": "conjunto centro de mesa folha azul",
+    "nome": "conjunto centro de mesa folha azul",
+    "categoria": "",
+    "material": "",
+    "descricao": "",
+    "preco": 0.0,
+    "estoque": 1,
+    "visivel": true,
+    "vendido": false,
     "fotos": [
       "WhatsApp Image 2026-09-20 at 14.08.45 (2).jpeg",
       "WhatsApp Image 2026-09-20 at 14.08.45.jpeg"
     ]
   },
   {
-    "id": "55435946",
-    "pasta": "mesa posta verde-marrom",
-    "nome": "mesa posta verde-marrom",
+    "id": "a3e5c5a0",
+    "pasta": "fruteira-centro de mesa verde",
+    "nome": "fruteira-centro de mesa verde",
     "categoria": "",
+    "material": "",
     "descricao": "",
     "preco": 0.0,
     "estoque": 1,
     "visivel": true,
+    "vendido": false,
     "fotos": [
-      "WhatsApp Image 2026-09-20 at 14.12.46.jpeg"
+      "WhatsApp Image 2026-09-20 at 14.08.39.jpeg",
+      "WhatsApp Image 2026-09-20 at 14.08.41 (1).jpeg",
+      "WhatsApp Image 2026-09-20 at 14.08.41.jpeg"
     ]
   },
   {
-    "id": "fd18c22d",
+    "id": "1f36ec2a",
     "pasta": "conjunto peça bege com flor centro de mesa",
     "nome": "conjunto peça bege com flor centro de mesa",
     "categoria": "",
+    "material": "",
     "descricao": "",
     "preco": 0.0,
     "estoque": 1,
     "visivel": true,
+    "vendido": false,
     "fotos": [
       "WhatsApp Image 2026-09-20 at 14.08.35.jpeg",
       "WhatsApp Image 2026-09-20 at 14.08.36 (1).jpeg",
@@ -167,17 +185,23 @@
     ]
   },
   {
-    "id": "b5750e75",
-    "pasta": "mesa posta concha/concha verde",
-    "nome": "mesa posta concha — concha verde",
+    "id": "6ebd895c",
+    "pasta": "peça azul conha centro de mesa",
+    "nome": "peça azul conha centro de mesa",
     "categoria": "",
+    "material": "",
     "descricao": "",
     "preco": 0.0,
     "estoque": 1,
     "visivel": true,
+    "vendido": false,
     "fotos": [
-      "WhatsApp Image 2026-09-20 at 14.09.05.jpeg",
-      "WhatsApp Image 2026-09-20 at 14.09.11.jpeg"
+      "WhatsApp Image 2026-09-20 at 14.08.55 (1).jpeg",
+      "WhatsApp Image 2026-09-20 at 14.08.55.jpeg",
+      "WhatsApp Image 2026-09-20 at 14.08.56 (1).jpeg",
+      "WhatsApp Image 2026-09-20 at 14.08.56.jpeg",
+      "WhatsApp Image 2026-09-20 at 14.08.57.jpeg",
+      "WhatsApp Image 2026-09-20 at 14.08.58.jpeg"
     ]
   }
 ]

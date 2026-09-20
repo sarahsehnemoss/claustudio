@@ -82,10 +82,12 @@ def scan_fotos():
                 "pasta": rel,
                 "nome": _limpar_nome(nome),
                 "categoria": "",
+                "material": "",
                 "descricao": "",
                 "preco": 0.0,
                 "estoque": 1,
                 "visivel": True,
+                "vendido": False,
                 "fotos": fotos,
             }
             alterado = True
@@ -94,6 +96,11 @@ def scan_fotos():
             if p.get("fotos") != fotos:
                 p["fotos"] = fotos
                 alterado = True
+            # backfill de campos novos em entradas antigas
+            for k, default in (("material", ""), ("vendido", False), ("estoque", 1)):
+                if k not in p:
+                    p[k] = default
+                    alterado = True
     validas = {rel for rel, _ in produtos_no_disco}
     final = [por_pasta[r] for r in validas if r in por_pasta]
     if alterado or len(final) != len(pecas):
@@ -127,7 +134,7 @@ def update_peca(pid):
     pecas = load_pecas()
     for p in pecas:
         if p["id"] == pid:
-            for k in ("nome", "categoria", "descricao"):
+            for k in ("nome", "categoria", "material", "descricao"):
                 if k in data:
                     p[k] = (data[k] or "").strip()
             if "preco" in data:
@@ -142,6 +149,8 @@ def update_peca(pid):
                     pass
             if "visivel" in data:
                 p["visivel"] = bool(data["visivel"])
+            if "vendido" in data:
+                p["vendido"] = bool(data["vendido"])
             save_pecas(pecas)
             return jsonify(p)
     return jsonify({"error": "peça não encontrada"}), 404

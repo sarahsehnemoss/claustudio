@@ -29,8 +29,8 @@
   .topo{display:flex;align-items:center;justify-content:space-between;height:80px}
   .marca{font-size:15px;font-weight:500;letter-spacing:.28em;text-transform:uppercase;color:var(--ink)}
   .logo{display:block;height:auto}
-  .logo.h{width:150px}
-  .logo.f{width:190px}
+  .logo.h{width:220px}
+  .logo.f{width:250px}
   nav{display:flex;gap:36px;align-items:center}
   nav a{font-size:12px;font-weight:400;color:var(--soft);transition:.2s;letter-spacing:.14em;text-transform:uppercase}
   nav a:hover{color:var(--ink)}
@@ -52,17 +52,22 @@
   .chip.ativo{background:var(--ink);color:#fff;border-color:var(--ink)}
 
   /* grid */
-  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:80px 56px;padding:0 0 140px}
-  .card{cursor:pointer;display:flex;flex-direction:column;transition:.3s;opacity:0;transform:translateY(14px)}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:64px 40px;padding:0 0 24px}
+  .cat-secao{padding:0 0 80px}
+  .cat-secao .cat-titulo{font-size:clamp(22px,3vw,32px);font-weight:300;letter-spacing:.02em;margin:0 0 36px;padding-bottom:14px;border-bottom:1px solid var(--line)}
+  .cat-secao .cat-titulo .cnt{font-size:12px;color:var(--faint);letter-spacing:.1em;text-transform:uppercase;margin-left:14px;font-weight:400}
+  .card{cursor:pointer;display:flex;flex-direction:column;transition:.3s;opacity:0;transform:translateY(14px);position:relative}
   .card.in{opacity:1;transform:none;transition:opacity .6s ease,transform .6s ease}
-  .card .foto{aspect-ratio:1/1;background:var(--line-2);overflow:hidden}
+  .card .foto{aspect-ratio:1/1;background:var(--line-2);overflow:hidden;position:relative}
   .card .foto img{width:100%;height:100%;object-fit:cover;transition:opacity .4s,transform .6s}
   .card:hover .foto img{opacity:.88;transform:scale(1.04)}
-  .card .corpo{padding:20px 2px 0;display:flex;flex-direction:column;gap:4px}
+  .card .vendido-tag{position:absolute;top:14px;left:14px;background:var(--ink);color:#fff;font-size:10px;letter-spacing:.16em;text-transform:uppercase;padding:5px 10px;font-weight:500}
+  .card .corpo{padding:18px 2px 0;display:flex;flex-direction:column;gap:4px}
   .card .cat{font-size:11px;text-transform:uppercase;letter-spacing:.16em;color:var(--faint);font-weight:400}
   .card h3{font-size:15px;font-weight:400;color:var(--ink);letter-spacing:.01em}
   .card .preco{font-size:15px;font-weight:300;color:var(--soft);padding-top:2px}
   .card .preco.zero{color:var(--faint);font-style:italic}
+  .card .preco.vendido{color:var(--faint);font-style:italic}
   .card .mais{margin-top:10px;font-size:11px;text-transform:uppercase;letter-spacing:.14em;color:var(--soft);transition:.2s}
   .card:hover .mais{color:var(--ink)}
   .vazio{text-align:center;padding:120px 0;color:var(--soft)}
@@ -85,6 +90,8 @@
   .modal .det .preco{font-size:22px;font-weight:300;color:var(--ink)}
   .modal .det .preco.zero{color:var(--soft);font-style:italic;font-size:16px}
   .modal .det p{color:var(--soft);font-size:15px;font-weight:300;line-height:1.7}
+  .modal .det .material{font-size:13px;color:var(--ink);letter-spacing:.02em;line-height:1.6}
+  .modal .det .material strong{font-weight:500;text-transform:uppercase;letter-spacing:.12em;font-size:11px;color:var(--faint);display:block;margin-bottom:4px}
   .modal .det .add-grande{margin-top:8px;background:var(--ink);color:#fff;border:none;border-radius:2px;padding:16px 28px;font-size:12px;font-weight:500;cursor:pointer;transition:.2s;letter-spacing:.14em;text-transform:uppercase;max-width:260px}
   .modal .det .add-grande:hover{background:#000}
   .modal .det .add-grande:disabled{background:var(--line);color:var(--faint);cursor:not-allowed}
@@ -131,6 +138,8 @@
   td .check{width:auto}
   .thumb{width:52px;height:52px;object-fit:cover;background:var(--line-2)}
   .salvar-linha{background:var(--ink);color:#fff;border:none;border-radius:2px;padding:7px 12px;cursor:pointer;font-size:11px;font-weight:500;letter-spacing:.06em;text-transform:uppercase}
+  tr.row-vendido{background:#FAFAFA}
+  tr.row-vendido td:first-child{box-shadow:inset 3px 0 0 var(--ink)}
   .admin .fechar-admin{float:right;background:none;border:none;font-size:24px;cursor:pointer;color:var(--ink)}
 
   /* toast */
@@ -169,6 +178,14 @@
   .lightbox img{max-width:90vw;max-height:90vh;object-fit:contain}
   .lightbox .nav{position:fixed;top:50%;transform:translateY(-50%);background:none;border:none;font-size:28px;color:var(--ink);cursor:pointer;padding:16px}
   .lightbox .nav.prev{left:16px} .lightbox .nav.next{right:16px}
+
+  /* balão WhatsApp flutuante */
+  .wabot{position:fixed;bottom:28px;right:28px;width:56px;height:56px;border-radius:50%;background:#25D366;display:grid;place-items:center;cursor:pointer;z-index:85;box-shadow:0 8px 24px -8px rgba(37,211,102,.6);transition:transform .2s}
+  .wabot:hover{transform:scale(1.06)}
+  .wabot svg{width:30px;height:30px;fill:#fff}
+  .wabot::after{content:"Fale conosco";position:absolute;right:68px;top:50%;transform:translateY(-50%);background:var(--ink);color:#fff;font-size:12px;padding:8px 14px;border-radius:4px;white-space:nowrap;opacity:0;pointer-events:none;transition:opacity .2s;letter-spacing:.04em}
+  .wabot:hover::after{opacity:1}
+  @media(max-width:700px){.wabot::after{display:none}}
 
   /* sobre */
   .sobre{padding:120px 0;text-align:center}
@@ -218,10 +235,9 @@
 </section>
 
 <section id="catalogo" class="wrap">
-  <div class="destaque" id="destaque"></div>
   <div class="filtros" id="filtros"></div>
   <div class="toolbar" id="toolbar"></div>
-  <div class="grid" id="grid"></div>
+  <div id="catalogo-corpo"></div>
 </section>
 
 <section id="sobre" class="sobre">
@@ -252,7 +268,7 @@
     <div class="ft-col">
       <h4>Contato</h4>
       <a href="https://instagram.com/claustudio" target="_blank">Instagram</a>
-      <a href="https://wa.me/5500000000000?text=Olá!%20Vim%20pelo%20site%20da%20Claustudio" target="_blank">WhatsApp</a>
+      <a href="https://wa.me/5547991084140?text=Olá!%20Vim%20pelo%20site%20da%20Clau%20Studio" target="_blank">WhatsApp 47 99108-4140</a>
       <a href="mailto:contato@claustudio.com.br">contato@claustudio.com.br</a>
     </div>
   </div>
@@ -275,6 +291,7 @@
       <h2 id="m-nome"></h2>
       <div class="preco" id="m-preco"></div>
       <p id="m-desc"></p>
+      <div class="material" id="m-material"></div>
       <button class="add-grande" id="m-add">Adicionar ao carrinho</button>
     </div>
   </div>
@@ -305,6 +322,11 @@
 
 <div class="toast" id="toast"></div>
 
+<!-- balão WhatsApp -->
+<a class="wabot" href="https://wa.me/5547991084140?text=Olá!%20Vim%20pelo%20site%20da%20Clau%20Studio" target="_blank" aria-label="Falar no WhatsApp">
+  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17.5 14.4c-.3-.1-1.7-.8-1.9-.9-.3-.1-.5-.1-.7.1-.2.3-.7.9-.9 1.1-.2.1-.3.1-.6 0-.3-.1-1.2-.5-2.3-1.4-.9-.8-1.4-1.7-1.6-2-.2-.3 0-.5.1-.6.1-.1.3-.3.4-.5.1-.1.1-.3 0-.4-.1-.1-.2-.9-.5-1.1-.2-.1 0-.1 0-.2.1-.1.1-.3.3-.3.5 0 .2.2.6.5 1 .3.4 1.3 1.6 2.7 2.2.4.1.7.2.9.2.3 0 .6 0 .8-.1.2-.1.7-.3.8-.6.1-.3.1-.5 0-.6 0-.1-.2-.2-.4-.3zM12 2a10 10 0 0 0-8.5 15.2L2 22l4.9-1.5A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-2.9.9.9-2.8-.2-.3A8.2 8.2 0 1 1 12 20.2z"/></svg>
+</a>
+
 <!-- lightbox -->
 <div class="lightbox" id="lightbox" onclick="if(event.target===this)fecharLbx()">
   <button class="nav prev" onclick="event.stopPropagation();lbxNav(-1)">‹</button>
@@ -330,22 +352,7 @@ window.addEventListener("scroll", syncHdr, {passive:true}); syncHdr();
 async function carregar(){
   const r = await fetch(API + "/api/pecas");
   pecas = await r.json();
-  renderFiltros(); renderDestaque(); renderToolbar(); render();
-}
-
-function renderDestaque(){
-  const el = document.getElementById("destaque");
-  if(!pecas.length){ el.innerHTML = ""; return; }
-  // destaque = peça com mais fotos (mais rica pra mostrar)
-  const p = [...pecas].sort((a,b)=>(b.fotos||[]).length-(a.fotos||[]).length)[0];
-  el.innerHTML = `
-    <div class="foto" onclick="abrirModal('${p.id}')"><img src="${API}/foto/${p.id}/0" alt="${esc(tit(p.nome))}"></div>
-    <div class="det">
-      <span class="etq">Peça em destaque</span>
-      <h2>${esc(tit(p.nome))}</h2>
-      <p>${esc(p.descricao || "Peça única, modelada e queimada no estúdio. Cada forma carrega a marca do tempo e do fogo.")}</p>
-      <button class="ver" onclick="abrirModal('${p.id}')">Ver peça →</button>
-    </div>`;
+  renderFiltros(); renderToolbar(); render();
 }
 
 function renderToolbar(){
@@ -373,28 +380,46 @@ function renderFiltros(){
 function setFiltro(c){ filtro=c; renderFiltros(); render(); }
 
 function render(){
-  const grid = document.getElementById("grid");
+  const corpo = document.getElementById("catalogo-corpo");
   let lista = filtro==="todas" ? [...pecas] : pecas.filter(p=>p.categoria===filtro);
   if(ordem==="nome") lista.sort((a,b)=>a.nome.localeCompare(b.nome,"pt-BR"));
   else if(ordem==="preco") lista.sort((a,b)=>a.preco-b.preco);
   else if(ordem==="fotos") lista.sort((a,b)=>(b.fotos||[]).length-(a.fotos||[]).length);
   if(!lista.length){
-    grid.innerHTML = `<div class="vazio"><h3>Vitrine ainda vazia</h3><p>Use o painel do estúdio (⚙) para publicar as peças.</p></div>`;
+    corpo.innerHTML = `<div class="vazio"><h3>Vitrine ainda vazia</h3><p>Use o painel do estúdio (⚙) para publicar as peças e atribuir categorias.</p></div>`;
     return;
   }
-  grid.innerHTML = lista.map(p=>`
-    <div class="card" onclick="abrirModal('${p.id}')">
-      <div class="foto"><img src="${API}/foto/${p.id}/0" alt="${esc(tit(p.nome))}" loading="lazy"></div>
-      <div class="corpo">
-        ${p.categoria?`<span class="cat">${esc(tit(p.categoria))}</span>`:""}
-        <h3>${esc(tit(p.nome))}</h3>
-        <div class="preco ${temPreco(p)?'':'zero'}">${precoHtml(p)}</div>
-        <span class="mais">Ver peça →</span>
-      </div>
+  // agrupa por categoria (sem categoria -> "Outras")
+  const grupos = {};
+  lista.forEach(p=>{ const c = p.categoria?.trim() || "Outras"; (grupos[c] = grupos[c] || []).push(p); });
+  const ordemCats = [...new Set(pecas.map(p=>p.categoria?.trim()).filter(Boolean))];
+  const chaves = Object.keys(grupos).sort((a,b)=>{
+    if(a==="Outras") return 1; if(b==="Outras") return -1;
+    return ordemCats.indexOf(a) - ordemCats.indexOf(b);
+  });
+  corpo.innerHTML = chaves.map(cat=>`
+    <div class="cat-secao">
+      <h2 class="cat-titulo">${esc(tit(cat))}<span class="cnt">${grupos[cat].length} ${grupos[cat].length===1?"peça":"peças"}</span></h2>
+      <div class="grid">${grupos[cat].map(p=>cardHtml(p)).join("")}</div>
     </div>`).join("");
   // fade-in ao rolar
   const obs = new IntersectionObserver((ents)=>ents.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add("in"); obs.unobserve(e.target); } }), {threshold:.08});
-  grid.querySelectorAll(".card").forEach(c=>obs.observe(c));
+  corpo.querySelectorAll(".card").forEach(c=>obs.observe(c));
+}
+
+function cardHtml(p){
+  return `
+    <div class="card" onclick="abrirModal('${p.id}')">
+      <div class="foto">
+        <img src="${API}/foto/${p.id}/0" alt="${esc(tit(p.nome))}" loading="lazy">
+        ${p.vendido?`<span class="vendido-tag">Vendido</span>`:""}
+      </div>
+      <div class="corpo">
+        <h3>${esc(tit(p.nome))}</h3>
+        <div class="preco ${p.vendido?'vendido':temPreco(p)?'':'zero'}">${p.vendido?'Vendido':precoHtml(p)}</div>
+        <span class="mais">${p.vendido?'Ver detalhes':'Ver peça →'}</span>
+      </div>
+    </div>`;
 }
 
 function abrirModal(id){
@@ -405,10 +430,12 @@ function abrirModal(id){
   const pr = document.getElementById("m-preco");
   pr.textContent = precoHtml(p); pr.className = "preco " + (temPreco(p)?"":"zero");
   document.getElementById("m-desc").textContent = p.descricao || "Peça única, feita à mão no Claustudio.";
+  const mat = document.getElementById("m-material");
+  mat.innerHTML = p.material ? `<strong>Material</strong>${esc(p.material)}` : "";
   const btn = document.getElementById("m-add");
-  btn.disabled = !temPreco(p);
-  btn.textContent = temPreco(p) ? "Adicionar ao carrinho" : "Preço a definir";
-  btn.onclick = () => { add(id); fecharModal(); };
+  if(p.vendido){ btn.disabled = true; btn.textContent = "Vendido"; btn.onclick = ()=>{}; }
+  else if(!temPreco(p)){ btn.disabled = true; btn.textContent = "Preço a definir"; btn.onclick = ()=>{}; }
+  else { btn.disabled = false; btn.textContent = "Adicionar ao carrinho"; btn.onclick = () => { add(id); fecharModal(); }; }
   renderGaleria(p);
   document.getElementById("modal").classList.add("aberto");
 }
@@ -517,16 +544,17 @@ function renderAdmin(){
   const corpo = document.getElementById("admin-corpo");
   corpo.innerHTML = `
     <table>
-      <thead><tr><th></th><th>Nome</th><th>Categoria</th><th>Preço</th><th>Estoque</th><th>Visível</th><th>Descrição</th><th></th></tr></thead>
+      <thead><tr><th></th><th>Nome</th><th>Categoria</th><th>Material</th><th>Preço</th><th>Visível</th><th>Vendido</th><th>Descrição</th><th></th></tr></thead>
       <tbody>
         ${pecas.map(p=>`
-          <tr data-id="${p.id}">
+          <tr data-id="${p.id}" ${p.vendido?'class="row-vendido"':''}>
             <td><img class="thumb" src="${API}/foto/${p.id}/0" alt=""></td>
             <td><input value="${esc(p.nome)}" data-k="nome"></td>
             <td><input value="${esc(p.categoria)}" data-k="categoria"></td>
+            <td><input value="${esc(p.material||'')}" data-k="material" placeholder="ex.: cerâmica, esmalte branco"></td>
             <td><input class="mini" type="number" step="0.01" value="${p.preco}" data-k="preco"></td>
-            <td><input class="mini" type="number" value="${p.estoque||1}" data-k="estoque"></td>
             <td><input class="check" type="checkbox" ${p.visivel?'checked':''} data-k="visivel"></td>
+            <td><input class="check" type="checkbox" ${p.vendido?'checked':''} data-k="vendido"></td>
             <td><textarea rows="2" data-k="descricao">${esc(p.descricao)}</textarea></td>
             <td><button class="salvar-linha" onclick="salvar('${p.id}')">Salvar</button></td>
           </tr>`).join("")}
