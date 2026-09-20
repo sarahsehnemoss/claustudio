@@ -50,10 +50,11 @@
 
   /* grid */
   .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:80px 56px;padding:0 0 140px}
-  .card{cursor:pointer;display:flex;flex-direction:column;transition:.3s}
+  .card{cursor:pointer;display:flex;flex-direction:column;transition:.3s;opacity:0;transform:translateY(14px)}
+  .card.in{opacity:1;transform:none;transition:opacity .6s ease,transform .6s ease}
   .card .foto{aspect-ratio:1/1;background:var(--line-2);overflow:hidden}
   .card .foto img{width:100%;height:100%;object-fit:cover;transition:opacity .4s,transform .6s}
-  .card:hover .foto img{opacity:.88}
+  .card:hover .foto img{opacity:.88;transform:scale(1.04)}
   .card .corpo{padding:20px 2px 0;display:flex;flex-direction:column;gap:4px}
   .card .cat{font-size:11px;text-transform:uppercase;letter-spacing:.16em;color:var(--faint);font-weight:400}
   .card h3{font-size:15px;font-weight:400;color:var(--ink);letter-spacing:.01em}
@@ -139,6 +140,33 @@
   .banner.erro{background:#F4F4F4;color:#111}
   .banner.pendente{background:#F4F4F4;color:#111}
 
+  /* destaque */
+  .destaque{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center;padding:0 0 100px}
+  .destaque .foto{aspect-ratio:1/1;background:var(--line-2);overflow:hidden;cursor:pointer}
+  .destaque .foto img{width:100%;height:100%;object-fit:cover;transition:transform .6s}
+  .destaque .foto:hover img{transform:scale(1.03)}
+  .destaque .det{display:flex;flex-direction:column;gap:18px}
+  .destaque .det .etq{font-size:11px;text-transform:uppercase;letter-spacing:.18em;color:var(--faint)}
+  .destaque .det h2{font-size:clamp(28px,4vw,44px);font-weight:300;line-height:1.2}
+  .destaque .det p{color:var(--soft);font-size:16px;font-weight:300;line-height:1.7;max-width:420px}
+  .destaque .det .ver{margin-top:8px;background:var(--ink);color:#fff;border:none;border-radius:2px;padding:15px 28px;font-size:12px;font-weight:500;cursor:pointer;letter-spacing:.14em;text-transform:uppercase;max-width:220px;transition:.2s}
+  .destaque .det .ver:hover{background:#000}
+  @media(max-width:860px){.destaque{grid-template-columns:1fr;gap:32px}}
+
+  /* toolbar (contagem + ordenação) */
+  .toolbar{display:flex;justify-content:space-between;align-items:center;margin:0 0 48px;padding-bottom:18px;border-bottom:1px solid var(--line)}
+  .toolbar .cont{font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--soft)}
+  .toolbar .sort{display:flex;gap:6px;align-items:center}
+  .toolbar .sort label{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--faint)}
+  .toolbar .sort select{font-family:inherit;font-size:12px;border:1px solid var(--line);border-radius:2px;padding:6px 10px;background:#fff;color:var(--ink);cursor:pointer}
+
+  /* lightbox */
+  .lightbox{position:fixed;inset:0;background:rgba(255,255,255,.98);z-index:100;display:none;place-items:center;padding:40px;cursor:zoom-out}
+  .lightbox.aberto{display:grid}
+  .lightbox img{max-width:90vw;max-height:90vh;object-fit:contain}
+  .lightbox .nav{position:fixed;top:50%;transform:translateY(-50%);background:none;border:none;font-size:28px;color:var(--ink);cursor:pointer;padding:16px}
+  .lightbox .nav.prev{left:16px} .lightbox .nav.next{right:16px}
+
   /* sobre */
   .sobre{padding:120px 0;text-align:center}
   .sobre h2{font-size:clamp(28px,4vw,42px);font-weight:300;margin-bottom:28px;letter-spacing:.02em}
@@ -181,7 +209,9 @@
 </section>
 
 <section id="catalogo" class="wrap">
+  <div class="destaque" id="destaque"></div>
   <div class="filtros" id="filtros"></div>
+  <div class="toolbar" id="toolbar"></div>
   <div class="grid" id="grid"></div>
 </section>
 
@@ -222,7 +252,7 @@
   <button class="fechar" onclick="fecharModal()">✕</button>
   <div class="modal">
     <div class="galeria">
-      <div class="main"><img id="m-img" src="" alt=""></div>
+      <div class="main"><img id="m-img" src="" alt="" onclick="abrirLbx()" style="cursor:zoom-in"></div>
       <div class="thumbs" id="m-thumbs"></div>
     </div>
     <div class="det">
@@ -260,9 +290,16 @@
 
 <div class="toast" id="toast"></div>
 
+<!-- lightbox -->
+<div class="lightbox" id="lightbox" onclick="if(event.target===this)fecharLbx()">
+  <button class="nav prev" onclick="event.stopPropagation();lbxNav(-1)">‹</button>
+  <img id="lbx-img" src="" alt="">
+  <button class="nav next" onclick="event.stopPropagation();lbxNav(1)">›</button>
+</div>
+
 <script>
 const API = "";
-let pecas = [], carrinho = [], filtro = "todas", adminLogado = false, modalId = null, modalIdx = 0;
+let pecas = [], carrinho = [], filtro = "todas", adminLogado = false, modalId = null, modalIdx = 0, ordem = "nome";
 
 const fmt = v => "R$ " + Number(v).toFixed(2).replace(".", ",");
 const temPreco = p => Number(p.preco) > 0;
@@ -278,8 +315,39 @@ window.addEventListener("scroll", syncHdr, {passive:true}); syncHdr();
 async function carregar(){
   const r = await fetch(API + "/api/pecas");
   pecas = await r.json();
-  renderFiltros(); render();
+  renderFiltros(); renderDestaque(); renderToolbar(); render();
 }
+
+function renderDestaque(){
+  const el = document.getElementById("destaque");
+  if(!pecas.length){ el.innerHTML = ""; return; }
+  // destaque = peça com mais fotos (mais rica pra mostrar)
+  const p = [...pecas].sort((a,b)=>(b.fotos||[]).length-(a.fotos||[]).length)[0];
+  el.innerHTML = `
+    <div class="foto" onclick="abrirModal('${p.id}')"><img src="${API}/foto/${p.id}/0" alt="${esc(tit(p.nome))}"></div>
+    <div class="det">
+      <span class="etq">Peça em destaque</span>
+      <h2>${esc(tit(p.nome))}</h2>
+      <p>${esc(p.descricao || "Peça única, modelada e queimada no estúdio. Cada forma carrega a marca do tempo e do fogo.")}</p>
+      <button class="ver" onclick="abrirModal('${p.id}')">Ver peça →</button>
+    </div>`;
+}
+
+function renderToolbar(){
+  const el = document.getElementById("toolbar");
+  const n = (filtro==="todas" ? pecas : pecas.filter(p=>p.categoria===filtro)).length;
+  el.innerHTML = `
+    <span class="cont">${n} ${n===1?"peça":"peças"}</span>
+    <div class="sort">
+      <label>Ordenar</label>
+      <select onchange="setOrdem(this.value)">
+        <option value="nome" ${ordem==='nome'?'selected':''}>Nome</option>
+        <option value="preco" ${ordem==='preco'?'selected':''}>Preço</option>
+        <option value="fotos" ${ordem==='fotos'?'selected':''}>Mais fotos</option>
+      </select>
+    </div>`;
+}
+function setOrdem(o){ ordem=o; renderToolbar(); render(); }
 
 function renderFiltros(){
   const cats = [...new Set(pecas.map(p=>p.categoria).filter(Boolean))];
@@ -291,14 +359,17 @@ function setFiltro(c){ filtro=c; renderFiltros(); render(); }
 
 function render(){
   const grid = document.getElementById("grid");
-  const lista = filtro==="todas" ? pecas : pecas.filter(p=>p.categoria===filtro);
+  let lista = filtro==="todas" ? [...pecas] : pecas.filter(p=>p.categoria===filtro);
+  if(ordem==="nome") lista.sort((a,b)=>a.nome.localeCompare(b.nome,"pt-BR"));
+  else if(ordem==="preco") lista.sort((a,b)=>a.preco-b.preco);
+  else if(ordem==="fotos") lista.sort((a,b)=>(b.fotos||[]).length-(a.fotos||[]).length);
   if(!lista.length){
     grid.innerHTML = `<div class="vazio"><h3>Vitrine ainda vazia</h3><p>Use o painel do estúdio (⚙) para publicar as peças.</p></div>`;
     return;
   }
   grid.innerHTML = lista.map(p=>`
     <div class="card" onclick="abrirModal('${p.id}')">
-      <div class="foto"><img src="${API}/foto/${p.id}/0" alt="${esc(p.nome)}" loading="lazy"></div>
+      <div class="foto"><img src="${API}/foto/${p.id}/0" alt="${esc(tit(p.nome))}" loading="lazy"></div>
       <div class="corpo">
         ${p.categoria?`<span class="cat">${esc(tit(p.categoria))}</span>`:""}
         <h3>${esc(tit(p.nome))}</h3>
@@ -306,6 +377,9 @@ function render(){
         <span class="mais">Ver peça →</span>
       </div>
     </div>`).join("");
+  // fade-in ao rolar
+  const obs = new IntersectionObserver((ents)=>ents.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add("in"); obs.unobserve(e.target); } }), {threshold:.08});
+  grid.querySelectorAll(".card").forEach(c=>obs.observe(c));
 }
 
 function abrirModal(id){
@@ -337,6 +411,22 @@ function setImg(i){
   document.querySelectorAll("#m-thumbs button").forEach((b,j)=>b.classList.toggle("on", j===i));
 }
 function fecharModal(){ document.getElementById("modal").classList.remove("aberto"); modalId=null; }
+
+/* lightbox (tela cheia) */
+function abrirLbx(){
+  if(!modalId) return;
+  const p = pecas.find(x=>x.id===modalId); if(!p) return;
+  document.getElementById("lbx-img").src = API + "/foto/" + p.id + "/" + modalIdx;
+  document.getElementById("lightbox").classList.add("aberto");
+}
+function fecharLbx(){ document.getElementById("lightbox").classList.remove("aberto"); }
+function lbxNav(d){
+  const p = pecas.find(x=>x.id===modalId); if(!p) return;
+  const n = (p.fotos||[]).length; if(!n) return;
+  modalIdx = (modalIdx + d + n) % n;
+  setImg(modalIdx);
+  document.getElementById("lbx-img").src = API + "/foto/" + p.id + "/" + modalIdx;
+}
 
 function add(id){
   const p = pecas.find(x=>x.id===id); if(!p || !temPreco(p)) return;
