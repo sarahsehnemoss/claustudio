@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Claustudio · Cerâmicas feitas à mão</title>
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath d='M7 13 Q7 25 16 25 Q25 25 25 13 Z' fill='none' stroke='%23111' stroke-width='1.6'/%3E%3Cpath d='M6 13 H26' stroke='%23111' stroke-width='1.6'/%3E%3C/svg%3E">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ctext x='16' y='22' font-family='Inter,sans-serif' font-size='13' font-weight='600' letter-spacing='0.5' text-anchor='middle' fill='%23111'%3ECS%3C/text%3E%3C/svg%3E">
 <meta name="theme-color" content="#FFFFFF">
 <meta name="description" content="Claustudio — cerâmicas feitas à mão. Peças únicas modeladas e queimadas no estúdio.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -267,6 +267,7 @@ let pecas = [], carrinho = [], filtro = "todas", adminLogado = false, modalId = 
 const fmt = v => "R$ " + Number(v).toFixed(2).replace(".", ",");
 const temPreco = p => Number(p.preco) > 0;
 const precoHtml = p => temPreco(p) ? fmt(p.preco) : "Preço sob consulta";
+const tit = s => (s||"").replace(/(^|[\s—-])([a-zà-ú])/g, (_,sp,c)=>sp+c.toUpperCase());
 const toast = (m) => { const t=document.getElementById("toast"); t.textContent=m; t.classList.add("show"); setTimeout(()=>t.classList.remove("show"),2200); };
 
 // header transparente sobre o hero, sólido ao rolar
@@ -299,8 +300,8 @@ function render(){
     <div class="card" onclick="abrirModal('${p.id}')">
       <div class="foto"><img src="${API}/foto/${p.id}/0" alt="${esc(p.nome)}" loading="lazy"></div>
       <div class="corpo">
-        ${p.categoria?`<span class="cat">${esc(p.categoria)}</span>`:""}
-        <h3>${esc(p.nome)}</h3>
+        ${p.categoria?`<span class="cat">${esc(tit(p.categoria))}</span>`:""}
+        <h3>${esc(tit(p.nome))}</h3>
         <div class="preco ${temPreco(p)?'':'zero'}">${precoHtml(p)}</div>
         <span class="mais">Ver peça →</span>
       </div>
@@ -310,8 +311,8 @@ function render(){
 function abrirModal(id){
   const p = pecas.find(x=>x.id===id); if(!p) return;
   modalId = id; modalIdx = 0;
-  document.getElementById("m-cat").textContent = p.categoria || "";
-  document.getElementById("m-nome").textContent = p.nome;
+  document.getElementById("m-cat").textContent = tit(p.categoria || "");
+  document.getElementById("m-nome").textContent = tit(p.nome);
   const pr = document.getElementById("m-preco");
   pr.textContent = precoHtml(p); pr.className = "preco " + (temPreco(p)?"":"zero");
   document.getElementById("m-desc").textContent = p.descricao || "Peça única, feita à mão no Claustudio.";
@@ -341,7 +342,7 @@ function add(id){
   const p = pecas.find(x=>x.id===id); if(!p || !temPreco(p)) return;
   const it = carrinho.find(x=>x.id===id);
   if(it) it.qtd++; else carrinho.push({id, nome:p.nome, preco:p.preco, qtd:1});
-  renderCarrinho(); toast(p.nome + " adicionada");
+  renderCarrinho(); toast(tit(p.nome) + " adicionada");
 }
 function rm(id){ carrinho = carrinho.filter(x=>x.id!==id); renderCarrinho(); }
 function qtd(id,d){ const it=carrinho.find(x=>x.id===id); if(!it) return; it.qtd+=d; if(it.qtd<1) rm(id); else renderCarrinho(); }
@@ -357,7 +358,7 @@ function renderCarrinho(){
       <div class="item">
         <img src="${API}/foto/${it.id}/0" alt="">
         <div class="info">
-          <h4>${esc(it.nome)}</h4>
+          <h4>${esc(tit(it.nome))}</h4>
           <div class="p">${fmt(it.preco)}</div>
           <div class="qty"><button onclick="qtd('${it.id}',-1)">−</button><span>${it.qtd}</span><button onclick="qtd('${it.id}',1)">+</button></div>
           <button class="remover" onclick="rm('${it.id}')">remover</button>
@@ -377,7 +378,7 @@ async function finalizar(){
   try{
     const r = await fetch(API+"/api/checkout", {
       method:"POST", headers:{"Content-Type":"application/json"},
-      body: JSON.stringify({items: carrinho.map(x=>({nome:x.nome, preco:x.preco, qtd:x.qtd}))})
+      body: JSON.stringify({items: carrinho.map(x=>({nome:tit(x.nome), preco:x.preco, qtd:x.qtd}))})
     });
     const d = await r.json();
     if(!r.ok){ toast(d.error || "Erro ao criar pagamento"); btn.disabled=false; btn.textContent="Finalizar no Mercado Pago"; return; }
