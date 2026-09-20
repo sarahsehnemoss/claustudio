@@ -6,7 +6,7 @@
 <title>Claustudio · Cerâmicas feitas à mão</title>
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ctext x='16' y='22' font-family='Inter,sans-serif' font-size='13' font-weight='600' letter-spacing='0.5' text-anchor='middle' fill='%23111'%3ECS%3C/text%3E%3C/svg%3E">
 <meta name="theme-color" content="#FFFFFF">
-<meta name="description" content="Claustudio — cerâmicas feitas à mão. Peças únicas modeladas e queimadas no estúdio.">
+<meta name="description" content="Clau Studio — ateliê de cerâmica em Picarraças, SC. Peças autorais e únicas por Claudine Sehnem. Encomendas sob medida.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant:wght@500;600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -128,18 +128,26 @@
   .admin h2{font-size:18px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;margin-bottom:6px}
   .admin .sub{color:var(--soft);font-size:13px;margin-bottom:28px;font-weight:300}
   .login{display:flex;flex-direction:column;gap:14px;max-width:340px;margin:40px auto}
-  .login input{padding:13px 14px;border:1px solid var(--line);border-radius:2px;font-family:inherit;font-size:14px;background:#fff}
+  .login input{padding:13px 14px;border:1px solid var(--line);border-radius:2px;font-family:inherit;font-size:16px;background:#fff}
   .login button{padding:13px;background:var(--ink);color:#fff;border:none;border-radius:2px;cursor:pointer;font-weight:500;font-family:inherit;letter-spacing:.08em;font-size:12px;text-transform:uppercase}
-  table{width:100%;border-collapse:collapse;font-size:13px}
-  th{text-align:left;padding:12px 8px;border-bottom:1px solid var(--ink);font-weight:500;color:var(--ink);font-size:10px;text-transform:uppercase;letter-spacing:.1em}
-  td{padding:10px 8px;border-bottom:1px solid var(--line);vertical-align:middle}
-  td input,td textarea{width:100%;padding:7px 9px;border:1px solid var(--line);border-radius:2px;font-family:inherit;font-size:13px;background:#fff}
-  td .mini{width:72px}
-  td .check{width:auto}
-  .thumb{width:52px;height:52px;object-fit:cover;background:var(--line-2)}
-  .salvar-linha{background:var(--ink);color:#fff;border:none;border-radius:2px;padding:7px 12px;cursor:pointer;font-size:11px;font-weight:500;letter-spacing:.06em;text-transform:uppercase}
-  tr.row-vendido{background:#FAFAFA}
-  tr.row-vendido td:first-child{box-shadow:inset 3px 0 0 var(--ink)}
+  .acards{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:20px}
+  .acard{border:1px solid var(--line);border-radius:4px;padding:18px;background:#fff}
+  .acard.vendido{border-color:var(--ink);box-shadow:inset 0 0 0 1px var(--ink)}
+  .acard .ac-top{display:flex;gap:14px;align-items:center;margin-bottom:14px}
+  .acard .ac-top img{width:64px;height:64px;object-fit:cover;border-radius:3px;background:var(--line-2)}
+  .acard .ac-top .ac-tit{font-size:15px;font-weight:500;flex:1;line-height:1.3}
+  .acard .ac-top .ac-tit small{display:block;font-size:11px;color:var(--faint);font-weight:400;letter-spacing:.04em;text-transform:uppercase;margin-top:3px}
+  .acard .campo{margin-bottom:12px}
+  .acard .campo label{display:block;font-size:11px;text-transform:uppercase;letter-spacing:.1em;color:var(--faint);margin-bottom:5px;font-weight:500}
+  .acard .campo input,.acard .campo textarea{width:100%;padding:10px 12px;border:1px solid var(--line);border-radius:3px;font-family:inherit;font-size:16px;background:#fff;color:var(--ink)}
+  .acard .campo textarea{resize:vertical;min-height:56px}
+  .acard .linha2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .acard .toggles{display:flex;gap:10px;margin-bottom:14px;flex-wrap:wrap}
+  .acard .tg{flex:1;min-width:110px;display:flex;align-items:center;justify-content:center;gap:8px;padding:11px;border:1px solid var(--line);border-radius:3px;cursor:pointer;font-size:13px;font-weight:500;letter-spacing:.02em;user-select:none;background:#fff;color:var(--soft)}
+  .acard .tg.on{background:var(--ink);color:#fff;border-color:var(--ink)}
+  .acard .tg input{display:none}
+  .acard .salvar-linha{width:100%;background:var(--ink);color:#fff;border:none;border-radius:3px;padding:13px;cursor:pointer;font-size:12px;font-weight:500;letter-spacing:.1em;text-transform:uppercase}
+  .acard .salvar-linha:active{background:#000}
   .admin .fechar-admin{float:right;background:none;border:none;font-size:24px;cursor:pointer;color:var(--ink)}
 
   /* toast */
@@ -192,6 +200,13 @@
   .sobre h2{font-size:clamp(28px,4vw,42px);font-weight:300;margin-bottom:28px;letter-spacing:.02em}
   .sobre p{max-width:560px;margin:0 auto;color:var(--soft);font-size:16px;font-weight:300;line-height:1.8}
 
+  /* sob medida */
+  .sobmedida{padding:100px 0;text-align:center;background:var(--line-2)}
+  .sobmedida h2{font-size:clamp(28px,4vw,42px);font-weight:300;margin-bottom:28px;letter-spacing:.02em}
+  .sobmedida p{max-width:580px;margin:0 auto 36px;color:var(--soft);font-size:16px;font-weight:300;line-height:1.8}
+  .cta-wpp{display:inline-block;background:#25D366;color:#fff;border-radius:2px;padding:16px 32px;font-size:12px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;transition:.2s}
+  .cta-wpp:hover{background:#1da851}
+
   footer{border-top:1px solid var(--line);padding:80px 0 56px;color:var(--soft);font-size:13px;font-weight:300}
   footer .ft-wrap{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:48px;max-width:1280px;margin:0 auto;padding:0 32px}
   footer .ft-col h4{font-size:11px;text-transform:uppercase;letter-spacing:.14em;color:var(--ink);margin-bottom:18px;font-weight:500}
@@ -218,6 +233,7 @@
     </a>
     <nav>
       <a href="#catalogo">Catálogo</a>
+      <a href="#sobmedida">Sob medida</a>
       <a href="#sobre">Sobre</a>
       <a href="#contato">Contato</a>
       <div class="acoes">
@@ -242,8 +258,16 @@
 
 <section id="sobre" class="sobre">
   <div class="wrap">
-    <h2>Sobre o estúdio</h2>
-    <p>O Claustudio é um ateliê de cerâmica onde cada peça é construída lentamente, do barro ao esmalte, passando pelo fogo. Trabalhamos em pequenas séries e peças autorais.</p>
+    <h2>Sobre o <em style="font-style:italic;color:var(--ink)">estúdio</em></h2>
+    <p>Clau Studio é um ateliê de cerâmica situado em Picarraças, Santa Catarina. Peças autorais e únicas, modeladas à mão por Claudine Sehnem — artista plástica com mais de 30 anos de experiência. Do barro ao esmalte, passando pelo fogo, cada forma carrega o tempo, o gesto e a memória de quem a fez.</p>
+  </div>
+</section>
+
+<section id="sobmedida" class="sobmedida">
+  <div class="wrap">
+    <h2>Encomendas sob medida</h2>
+    <p>Cerâmica é gesto e intenção. Se você sonha com uma peça que não está no catálogo — um vaso de altura específica, um jogo de mesa com a sua paleta, um presente que carrega uma história — a gente faz pra você. Modelamos, esmaltamos e queimamos sob encomenda, em pequenas séries ou peça única.</p>
+    <a class="cta-wpp" href="https://wa.me/5547991084140?text=Olá!%20Quero%20encomendar%20uma%20peça%20sob%20medida" target="_blank">Falar no WhatsApp →</a>
   </div>
 </section>
 
@@ -257,7 +281,7 @@
           <text x="441" y="62" text-anchor="middle" font-family="'Cormorant', Georgia, serif" font-weight="500" font-size="54" letter-spacing="10" fill="#2A2018">STUDIO</text>
         </svg>
       </div>
-      <p style="max-width:300px;line-height:1.7">Cerâmicas feitas à mão, do barro ao fogo. Peças únicas modeladas e queimadas no estúdio.</p>
+      <p style="max-width:300px;line-height:1.7">Ateliê de cerâmica em Picarraças, SC. Peças autorais e únicas por Claudine Sehnem.</p>
     </div>
     <div class="ft-col">
       <h4>Navegação</h4>
@@ -273,7 +297,7 @@
     </div>
   </div>
   <div class="ft-base">
-    <span>© 2026 Claustudio · claustudio.com.br</span>
+    <span>© 2026 Clau Studio · claustudio.com.br</span>
     <span>Feito à mão, com paciência.</span>
   </div>
 </footer>
@@ -542,31 +566,43 @@ async function entrar(){
 
 function renderAdmin(){
   const corpo = document.getElementById("admin-corpo");
-  corpo.innerHTML = `
-    <table>
-      <thead><tr><th></th><th>Nome</th><th>Categoria</th><th>Material</th><th>Preço</th><th>Visível</th><th>Vendido</th><th>Descrição</th><th></th></tr></thead>
-      <tbody>
-        ${pecas.map(p=>`
-          <tr data-id="${p.id}" ${p.vendido?'class="row-vendido"':''}>
-            <td><img class="thumb" src="${API}/foto/${p.id}/0" alt=""></td>
-            <td><input value="${esc(p.nome)}" data-k="nome"></td>
-            <td><input value="${esc(p.categoria)}" data-k="categoria"></td>
-            <td><input value="${esc(p.material||'')}" data-k="material" placeholder="ex.: cerâmica, esmalte branco"></td>
-            <td><input class="mini" type="number" step="0.01" value="${p.preco}" data-k="preco"></td>
-            <td><input class="check" type="checkbox" ${p.visivel?'checked':''} data-k="visivel"></td>
-            <td><input class="check" type="checkbox" ${p.vendido?'checked':''} data-k="vendido"></td>
-            <td><textarea rows="2" data-k="descricao">${esc(p.descricao)}</textarea></td>
-            <td><button class="salvar-linha" onclick="salvar('${p.id}')">Salvar</button></td>
-          </tr>`).join("")}
-      </tbody>
-    </table>`;
+  corpo.innerHTML = `<div class="acards">` + pecas.map(p=>{
+    const vis = p.visivel, vend = p.vendido;
+    return `
+    <div class="acard ${vend?'vendido':''}" data-id="${p.id}">
+      <div class="ac-top">
+        <img src="${API}/foto/${p.id}/0" alt="">
+        <div class="ac-tit">${esc(tit(p.nome))}<small>${p.categoria?esc(tit(p.categoria)):'sem categoria'}</small></div>
+      </div>
+      <div class="campo"><label>Nome</label><input value="${esc(p.nome)}" data-k="nome"></div>
+      <div class="linha2">
+        <div class="campo"><label>Categoria</label><input value="${esc(p.categoria||'')}" data-k="categoria" placeholder="ex.: Vaso"></div>
+        <div class="campo"><label>Preço (R$)</label><input type="number" step="0.01" value="${p.preco}" data-k="preco" inputmode="decimal"></div>
+      </div>
+      <div class="campo"><label>Material</label><input value="${esc(p.material||'')}" data-k="material" placeholder="ex.: cerâmica, esmalte branco"></div>
+      <div class="campo"><label>Descrição</label><textarea data-k="descricao" placeholder="Texto sobre a peça">${esc(p.descricao)}</textarea></div>
+      <div class="toggles">
+        <label class="tg ${vis?'on':''}" data-tg="visivel">Visível<input type="checkbox" ${vis?'checked':''} data-k="visivel"></label>
+        <label class="tg ${vend?'on':''}" data-tg="vendido">Vendido<input type="checkbox" ${vend?'checked':''} data-k="vendido"></label>
+      </div>
+      <button class="salvar-linha" onclick="salvar('${p.id}')">Salvar</button>
+    </div>`;
+  }).join("") + `</div>`;
+  // toggles: clicar no botão alterna o checkbox + classe
+  corpo.querySelectorAll(".tg").forEach(tg=>{
+    tg.addEventListener("click", e=>{
+      const cb = tg.querySelector("input[type=checkbox]");
+      cb.checked = !cb.checked;
+      tg.classList.toggle("on", cb.checked);
+    });
+  });
 }
 function esc(s){ return (s||"").replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;'); }
 
 async function salvar(id){
-  const tr = document.querySelector(`tr[data-id="${id}"]`);
+  const card = document.querySelector(`.acard[data-id="${id}"]`);
   const body = {};
-  tr.querySelectorAll("[data-k]").forEach(el=>{
+  card.querySelectorAll("[data-k]").forEach(el=>{
     body[el.dataset.k] = el.type==="checkbox" ? el.checked : el.value;
   });
   const r = await fetch(API+"/api/pecas/"+id, {
@@ -576,7 +612,7 @@ async function salvar(id){
   if(!r.ok){ toast("Erro ao salvar"); return; }
   const atual = await r.json();
   const i = pecas.findIndex(x=>x.id===id); pecas[i] = atual;
-  toast("Peça atualizada"); renderFiltros(); render();
+  toast("Peça atualizada"); renderFiltros(); render(); renderAdmin();
 }
 
 /* status de retorno MP */
