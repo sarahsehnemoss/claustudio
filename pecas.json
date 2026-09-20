@@ -1,9 +1,9 @@
 [
   {
-    "id": "25dde2b2",
+    "id": "3d98fa0e",
     "pasta": "centro de mesa marrom-verde-azul mescla",
     "nome": "centro de mesa marrom-verde-azul mescla",
-    "categoria": "",
+    "categoria": "Centro de Mesa",
     "material": "",
     "descricao": "",
     "preco": 0.0,
@@ -15,10 +15,10 @@
     ]
   },
   {
-    "id": "f1feb551",
+    "id": "b8edb91c",
     "pasta": "mesa posta concha/concha azul",
     "nome": "mesa posta concha — concha azul",
-    "categoria": "",
+    "categoria": "Mesa Posta",
     "material": "",
     "descricao": "",
     "preco": 0.0,
@@ -33,10 +33,10 @@
     ]
   },
   {
-    "id": "561f0979",
+    "id": "43a3c668",
     "pasta": "petisqueira bege",
     "nome": "petisqueira bege",
-    "categoria": "",
+    "categoria": "Petisqueira",
     "material": "",
     "descricao": "",
     "preco": 0.0,
@@ -52,10 +52,10 @@
     ]
   },
   {
-    "id": "d53280c3",
+    "id": "fa6703a9",
     "pasta": "mesa posta folha",
     "nome": "mesa posta folha",
-    "categoria": "",
+    "categoria": "Mesa Posta",
     "material": "",
     "descricao": "",
     "preco": 0.0,
@@ -70,10 +70,25 @@
     ]
   },
   {
-    "id": "db6c20da",
-    "pasta": "vazo verde-marrom",
-    "nome": "vazo verde-marrom",
-    "categoria": "",
+    "id": "314e907c",
+    "pasta": "centro de mesa costela adão grande",
+    "nome": "centro de mesa costela adão grande",
+    "categoria": "Centro de Mesa",
+    "material": "",
+    "descricao": "",
+    "preco": 0.0,
+    "estoque": 1,
+    "visivel": true,
+    "vendido": false,
+    "fotos": [
+      "WhatsApp Image 2026-09-20 at 14.12.47.jpeg"
+    ]
+  },
+  {
+    "id": "ad5ac8a5",
+    "pasta": "vaso verde-marrom",
+    "nome": "vaso verde-marrom",
+    "categoria": "Vaso",
     "material": "",
     "descricao": "",
     "preco": 0.0,
@@ -86,25 +101,10 @@
     ]
   },
   {
-    "id": "0c9b90e1",
-    "pasta": "centro de mesa costela adão grande",
-    "nome": "centro de mesa costela adão grande",
-    "categoria": "",
-    "material": "",
-    "descricao": "",
-    "preco": 0.0,
-    "estoque": 1,
-    "visivel": true,
-    "vendido": false,
-    "fotos": [
-      "WhatsApp Image 2026-09-20 at 14.12.47.jpeg"
-    ]
-  },
-  {
-    "id": "f0ab3090",
+    "id": "9a2de636",
     "pasta": "mesa posta verde-marrom",
     "nome": "mesa posta verde-marrom",
-    "categoria": "",
+    "categoria": "Mesa Posta",
     "material": "",
     "descricao": "",
     "preco": 0.0,
@@ -116,10 +116,10 @@
     ]
   },
   {
-    "id": "145bf604",
+    "id": "1cfb97b9",
     "pasta": "mesa posta concha/concha verde",
     "nome": "mesa posta concha — concha verde",
-    "categoria": "",
+    "categoria": "Mesa Posta",
     "material": "",
     "descricao": "",
     "preco": 0.0,
@@ -132,10 +132,10 @@
     ]
   },
   {
-    "id": "431f3073",
+    "id": "f52a1b35",
     "pasta": "conjunto centro de mesa folha azul",
     "nome": "conjunto centro de mesa folha azul",
-    "categoria": "",
+    "categoria": "Centro de Mesa",
     "material": "",
     "descricao": "",
     "preco": 0.0,
@@ -148,10 +148,10 @@
     ]
   },
   {
-    "id": "a3e5c5a0",
+    "id": "55b4c52d",
     "pasta": "fruteira-centro de mesa verde",
     "nome": "fruteira-centro de mesa verde",
-    "categoria": "",
+    "categoria": "Centro de Mesa",
     "material": "",
     "descricao": "",
     "preco": 0.0,
@@ -165,10 +165,10 @@
     ]
   },
   {
-    "id": "1f36ec2a",
+    "id": "9935e00b",
     "pasta": "conjunto peça bege com flor centro de mesa",
     "nome": "conjunto peça bege com flor centro de mesa",
-    "categoria": "",
+    "categoria": "Centro de Mesa",
     "material": "",
     "descricao": "",
     "preco": 0.0,
@@ -185,10 +185,10 @@
     ]
   },
   {
-    "id": "6ebd895c",
+    "id": "d85fa71f",
     "pasta": "peça azul conha centro de mesa",
     "nome": "peça azul conha centro de mesa",
-    "categoria": "",
+    "categoria": "Centro de Mesa",
     "material": "",
     "descricao": "",
     "preco": 0.0,
