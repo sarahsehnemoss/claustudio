@@ -155,6 +155,9 @@ def checkout():
         for it in items
     ]
     base = SITE_URL or request.host_url.rstrip("/")
+    # Mercado Envios: frete automático (PAC/SEDEX) calculado no checkout pelo CEP do comprador.
+    # dimensions no formato "altura x largura x comprimento, peso_gramas" (cm, g).
+    dims = os.getenv("MP_DIMENSIONS", "20x20x20,1000")
     payload = {
         "items": mp_items,
         "statement_descriptor": "CLAUSTUDIO",
@@ -164,6 +167,10 @@ def checkout():
             "pending": base + "/?status=pending",
         },
         "auto_return": "approved",
+        "shipments": {
+            "mode": "me2",
+            "dimensions": dims,
+        },
     }
     try:
         r = requests.post(
