@@ -1,35 +1,19 @@
 [
   {
-    "id": "3d98fa0e",
-    "pasta": "centro de mesa marrom-verde-azul mescla",
-    "nome": "centro de mesa marrom-verde-azul mescla",
+    "id": "55b4c52d",
+    "pasta": "fruteira-centro de mesa verde",
+    "nome": "fruteira-centro de mesa verde",
     "categoria": "Centro de Mesa",
     "material": "",
     "descricao": "",
-    "preco": 790.0,
+    "preco": 630.0,
     "estoque": 1,
     "visivel": true,
     "vendido": false,
     "fotos": [
-      "WhatsApp Image 2026-09-20 at 14.08.42.jpeg"
-    ]
-  },
-  {
-    "id": "b8edb91c",
-    "pasta": "mesa posta concha/concha azul",
-    "nome": "mesa posta concha — concha azul",
-    "categoria": "Mesa Posta",
-    "material": "",
-    "descricao": "Mesa posta para 13 lugares",
-    "preco": 590.0,
-    "estoque": 1,
-    "visivel": true,
-    "vendido": false,
-    "fotos": [
-      "WhatsApp Image 2026-09-20 at 14.12.47 (1).jpeg",
-      "WhatsApp Image 2026-09-20 at 14.12.48 (1).jpeg",
-      "WhatsApp Image 2026-09-20 at 14.12.48.jpeg",
-      "WhatsApp Image 2026-09-20 at 14.12.49.jpeg"
+      "WhatsApp Image 2026-09-20 at 14.08.39.jpeg",
+      "WhatsApp Image 2026-09-20 at 14.08.41 (1).jpeg",
+      "WhatsApp Image 2026-09-20 at 14.08.41.jpeg"
     ]
   },
   {
@@ -52,6 +36,24 @@
     ]
   },
   {
+    "id": "b8edb91c",
+    "pasta": "mesa posta concha/concha azul",
+    "nome": "mesa posta concha — concha azul",
+    "categoria": "Mesa Posta",
+    "material": "",
+    "descricao": "Mesa posta para 13 lugares",
+    "preco": 590.0,
+    "estoque": 1,
+    "visivel": true,
+    "vendido": false,
+    "fotos": [
+      "WhatsApp Image 2026-09-20 at 14.12.47 (1).jpeg",
+      "WhatsApp Image 2026-09-20 at 14.12.48 (1).jpeg",
+      "WhatsApp Image 2026-09-20 at 14.12.48.jpeg",
+      "WhatsApp Image 2026-09-20 at 14.12.49.jpeg"
+    ]
+  },
+  {
     "id": "fa6703a9",
     "pasta": "mesa posta folha",
     "nome": "mesa posta folha",
@@ -67,68 +69,6 @@
       "WhatsApp Image 2026-09-20 at 14.12.41.jpeg",
       "WhatsApp Image 2026-09-20 at 14.12.42.jpeg",
       "WhatsApp Image 2026-09-20 at 14.12.44.jpeg"
-    ]
-  },
-  {
-    "id": "314e907c",
-    "pasta": "centro de mesa costela adão grande",
-    "nome": "centro de mesa costela adão grande",
-    "categoria": "Centro de Mesa",
-    "material": "",
-    "descricao": "",
-    "preco": 890.0,
-    "estoque": 1,
-    "visivel": true,
-    "vendido": false,
-    "fotos": [
-      "WhatsApp Image 2026-09-20 at 14.12.47.jpeg"
-    ]
-  },
-  {
-    "id": "ad5ac8a5",
-    "pasta": "vaso verde-marrom",
-    "nome": "vaso verde-marrom",
-    "categoria": "Vaso",
-    "material": "",
-    "descricao": "",
-    "preco": 750.0,
-    "estoque": 1,
-    "visivel": true,
-    "vendido": false,
-    "fotos": [
-      "WhatsApp Image 2026-09-20 at 14.08.46.jpeg",
-      "WhatsApp Image 2026-09-20 at 14.08.54.jpeg"
-    ]
-  },
-  {
-    "id": "9a2de636",
-    "pasta": "mesa posta verde-marrom",
-    "nome": "mesa posta verde-marrom",
-    "categoria": "Mesa Posta",
-    "material": "",
-    "descricao": "Mesa posta para 13 lugares",
-    "preco": 630.0,
-    "estoque": 1,
-    "visivel": true,
-    "vendido": false,
-    "fotos": [
-      "WhatsApp Image 2026-09-20 at 14.12.46.jpeg"
-    ]
-  },
-  {
-    "id": "1cfb97b9",
-    "pasta": "mesa posta concha/concha verde",
-    "nome": "mesa posta concha — concha verde",
-    "categoria": "Mesa Posta",
-    "material": "",
-    "descricao": "Mesa posta para 13 lugares",
-    "preco": 590.0,
-    "estoque": 1,
-    "visivel": true,
-    "vendido": false,
-    "fotos": [
-      "WhatsApp Image 2026-09-20 at 14.09.05.jpeg",
-      "WhatsApp Image 2026-09-20 at 14.09.11.jpeg"
     ]
   },
   {
@@ -148,20 +88,33 @@
     ]
   },
   {
-    "id": "55b4c52d",
-    "pasta": "fruteira-centro de mesa verde",
-    "nome": "fruteira-centro de mesa verde",
-    "categoria": "Centro de Mesa",
+    "id": "9a2de636",
+    "pasta": "mesa posta verde-marrom",
+    "nome": "mesa posta verde-marrom",
+    "categoria": "Mesa Posta",
     "material": "",
-    "descricao": "",
+    "descricao": "Mesa posta para 13 lugares",
     "preco": 630.0,
     "estoque": 1,
     "visivel": true,
     "vendido": false,
     "fotos": [
-      "WhatsApp Image 2026-09-20 at 14.08.39.jpeg",
-      "WhatsApp Image 2026-09-20 at 14.08.41 (1).jpeg",
-      "WhatsApp Image 2026-09-20 at 14.08.41.jpeg"
+      "WhatsApp Image 2026-09-20 at 14.12.46.jpeg"
+    ]
+  },
+  {
+    "id": "3d98fa0e",
+    "pasta": "centro de mesa marrom-verde-azul mescla",
+    "nome": "centro de mesa marrom-verde-azul mescla",
+    "categoria": "Centro de Mesa",
+    "material": "",
+    "descricao": "",
+    "preco": 790.0,
+    "estoque": 1,
+    "visivel": true,
+    "vendido": false,
+    "fotos": [
+      "WhatsApp Image 2026-09-20 at 14.08.42.jpeg"
     ]
   },
   {
@@ -185,6 +138,22 @@
     ]
   },
   {
+    "id": "ad5ac8a5",
+    "pasta": "vaso verde-marrom",
+    "nome": "vaso verde-marrom",
+    "categoria": "Vaso",
+    "material": "",
+    "descricao": "",
+    "preco": 750.0,
+    "estoque": 1,
+    "visivel": true,
+    "vendido": false,
+    "fotos": [
+      "WhatsApp Image 2026-09-20 at 14.08.46.jpeg",
+      "WhatsApp Image 2026-09-20 at 14.08.54.jpeg"
+    ]
+  },
+  {
     "id": "d85fa71f",
     "pasta": "peça azul conha centro de mesa",
     "nome": "peça azul conha centro de mesa",
@@ -202,6 +171,37 @@
       "WhatsApp Image 2026-09-20 at 14.08.56.jpeg",
       "WhatsApp Image 2026-09-20 at 14.08.57.jpeg",
       "WhatsApp Image 2026-09-20 at 14.08.58.jpeg"
+    ]
+  },
+  {
+    "id": "314e907c",
+    "pasta": "centro de mesa costela adão grande",
+    "nome": "centro de mesa costela adão grande",
+    "categoria": "Centro de Mesa",
+    "material": "",
+    "descricao": "",
+    "preco": 890.0,
+    "estoque": 1,
+    "visivel": true,
+    "vendido": false,
+    "fotos": [
+      "WhatsApp Image 2026-09-20 at 14.12.47.jpeg"
+    ]
+  },
+  {
+    "id": "1cfb97b9",
+    "pasta": "mesa posta concha/concha verde",
+    "nome": "mesa posta concha — concha verde",
+    "categoria": "Mesa Posta",
+    "material": "",
+    "descricao": "Mesa posta para 13 lugares",
+    "preco": 590.0,
+    "estoque": 1,
+    "visivel": true,
+    "vendido": false,
+    "fotos": [
+      "WhatsApp Image 2026-09-20 at 14.09.05.jpeg",
+      "WhatsApp Image 2026-09-20 at 14.09.11.jpeg"
     ]
   }
 ]

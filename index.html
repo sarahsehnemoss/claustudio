@@ -148,6 +148,26 @@
   .acard .tg input{display:none}
   .acard .salvar-linha{width:100%;background:var(--ink);color:#fff;border:none;border-radius:3px;padding:13px;cursor:pointer;font-size:12px;font-weight:500;letter-spacing:.1em;text-transform:uppercase}
   .acard .salvar-linha:active{background:#000}
+  .btn-novo{display:block;width:100%;max-width:400px;margin:0 auto 24px;padding:14px;background:transparent;border:1px dashed var(--ink);border-radius:4px;cursor:pointer;font-size:13px;font-weight:500;letter-spacing:.06em;text-transform:uppercase;color:var(--ink);font-family:inherit;transition:.2s}
+  .btn-novo:hover{background:var(--ink);color:#fff}
+  .novo-form{border:1px solid var(--ink);border-radius:4px;padding:20px;margin-bottom:24px;background:#fff}
+  .novo-form h3{font-size:15px;font-weight:500;margin-bottom:16px;letter-spacing:.04em}
+  .novo-form .campo{margin-bottom:12px}
+  .novo-form .campo label{display:block;font-size:11px;text-transform:uppercase;letter-spacing:.1em;color:var(--faint);margin-bottom:5px;font-weight:500}
+  .novo-form .campo input,.novo-form .campo textarea{width:100%;padding:10px 12px;border:1px solid var(--line);border-radius:3px;font-family:inherit;font-size:16px;background:#fff}
+  .novo-form .linha2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .novo-form .novo-botoes{display:flex;gap:10px;margin-top:8px}
+  .novo-form .novo-botoes button{flex:1}
+  .ac-fotos{margin-bottom:14px;padding-bottom:14px;border-bottom:1px solid var(--line)}
+  .ac-fotos .fotos-label{display:block;font-size:11px;text-transform:uppercase;letter-spacing:.1em;color:var(--faint);margin-bottom:8px;font-weight:500}
+  .athumbs{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:8px}
+  .athumb{position:relative;width:52px;height:52px}
+  .athumb img{width:100%;height:100%;object-fit:cover;border-radius:3px;background:var(--line-2)}
+  .athumb-x{position:absolute;top:-6px;right:-6px;width:20px;height:20px;border-radius:50%;background:var(--ink);color:#fff;border:none;cursor:pointer;font-size:11px;display:grid;place-items:center}
+  .add-foto-btn{display:inline-block;padding:8px 14px;border:1px dashed var(--line);border-radius:3px;font-size:12px;color:var(--soft);cursor:pointer;letter-spacing:.04em}
+  .add-foto-btn:hover{border-color:var(--ink);color:var(--ink)}
+  .excluir-btn{width:100%;background:transparent;color:#B33;border:1px solid #DCC;border-radius:3px;padding:11px;cursor:pointer;font-size:12px;font-weight:500;letter-spacing:.06em;text-transform:uppercase;margin-top:8px}
+  .excluir-btn:active{background:#B33;color:#fff}
   .admin .fechar-admin{float:right;background:none;border:none;font-size:24px;cursor:pointer;color:var(--ink)}
 
   /* toast */
@@ -586,13 +606,22 @@ async function entrar(){
 
 function renderAdmin(){
   const corpo = document.getElementById("admin-corpo");
-  corpo.innerHTML = `<div class="acards">` + pecas.map(p=>{
+  corpo.innerHTML = `
+    <button class="btn-novo" onclick="abrirNovaPeca()">+ Adicionar produto</button>
+    <div class="acards">` + pecas.map(p=>{
     const vis = p.visivel, vend = p.vendido;
+    const fotos = p.fotos || [];
+    const thumbs = fotos.map((_,i)=>`<div class="athumb"><img src="${API}/foto/${p.id}/${i}" alt=""><button class="athumb-x" onclick="delFoto('${p.id}',${i})">✕</button></div>`).join("");
     return `
     <div class="acard ${vend?'vendido':''}" data-id="${p.id}">
       <div class="ac-top">
         <img src="${API}/foto/${p.id}/0" alt="">
         <div class="ac-tit">${esc(tit(p.nome))}<small>${p.categoria?esc(tit(p.categoria)):'sem categoria'}</small></div>
+      </div>
+      <div class="ac-fotos">
+        <label class="fotos-label">Fotos (${fotos.length})</label>
+        <div class="athumbs">${thumbs}</div>
+        <label class="add-foto-btn">+ Adicionar foto<input type="file" accept="image/*" multiple onchange="addFoto('${p.id}',this.files)" hidden></label>
       </div>
       <div class="campo"><label>Nome</label><input value="${esc(p.nome)}" data-k="nome"></div>
       <div class="linha2">
@@ -606,9 +635,10 @@ function renderAdmin(){
         <label class="tg ${vend?'on':''}" data-tg="vendido">Vendido<input type="checkbox" ${vend?'checked':''} data-k="vendido"></label>
       </div>
       <button class="salvar-linha" onclick="salvar('${p.id}')">Salvar</button>
+      <button class="excluir-btn" onclick="delPeca('${p.id}')">Excluir produto</button>
     </div>`;
   }).join("") + `</div>`;
-  // toggles: clicar no botão alterna o checkbox + classe
+  // toggles
   corpo.querySelectorAll(".tg").forEach(tg=>{
     tg.addEventListener("click", e=>{
       const cb = tg.querySelector("input[type=checkbox]");
@@ -617,6 +647,75 @@ function renderAdmin(){
     });
   });
 }
+
+function abrirNovaPeca(){
+  document.getElementById("admin-corpo").insertAdjacentHTML("afterbegin", `
+    <div class="novo-form" id="novo-form">
+      <h3>Novo produto</h3>
+      <div class="campo"><label>Nome</label><input id="np-nome" placeholder="ex.: Vaso alto verde"></div>
+      <div class="linha2">
+        <div class="campo"><label>Categoria</label><input id="np-cat" placeholder="ex.: Vaso"></div>
+        <div class="campo"><label>Preço (R$)</label><input id="np-preco" type="number" step="0.01" inputmode="decimal" placeholder="0.00"></div>
+      </div>
+      <div class="campo"><label>Material</label><input id="np-mat" placeholder="ex.: cerâmica, esmalte"></div>
+      <div class="campo"><label>Descrição</label><textarea id="np-desc" placeholder="Texto sobre a peça"></textarea></div>
+      <div class="campo"><label>Fotos (escolha do celular)</label><input id="np-fotos" type="file" accept="image/*" multiple></div>
+      <div class="novo-botoes">
+        <button class="salvar-linha" onclick="salvarNovaPeca()">Criar produto</button>
+        <button class="excluir-btn" onclick="document.getElementById('novo-form').remove()">Cancelar</button>
+      </div>
+    </div>
+  `);
+}
+
+async function salvarNovaPeca(){
+  const fd = new FormData();
+  fd.append("nome", document.getElementById("np-nome").value);
+  fd.append("categoria", document.getElementById("np-cat").value);
+  fd.append("preco", document.getElementById("np-preco").value);
+  fd.append("material", document.getElementById("np-mat").value);
+  fd.append("descricao", document.getElementById("np-desc").value);
+  fd.append("visivel", "true");
+  const files = document.getElementById("np-fotos").files;
+  for (const f of files) fd.append("fotos", f);
+  toast("Criando produto...");
+  const r = await fetch(API+"/api/pecas/nova", {method:"POST", headers:{"X-Admin-Password":window._senha}, body:fd});
+  if(!r.ok){ toast("Erro ao criar"); return; }
+  const p = await r.json();
+  pecas.push(p);
+  toast("Produto criado!");
+  renderAdmin(); renderFiltros(); render();
+}
+
+async function addFoto(id, files){
+  if(!files || !files.length) return;
+  const fd = new FormData();
+  for (const f of files) fd.append("fotos", f);
+  toast("Enviando foto...");
+  const r = await fetch(API+`/api/pecas/${id}/foto`, {method:"POST", headers:{"X-Admin-Password":window._senha}, body:fd});
+  if(!r.ok){ toast("Erro ao enviar"); return; }
+  const p = await r.json();
+  const i = pecas.findIndex(x=>x.id===id); pecas[i] = p;
+  toast("Foto adicionada!"); renderAdmin();
+}
+
+async function delFoto(id, idx){
+  if(!confirm("Remover esta foto?")) return;
+  const r = await fetch(API+`/api/pecas/${id}/foto/${idx}`, {method:"DELETE", headers:{"X-Admin-Password":window._senha}});
+  if(!r.ok){ toast("Erro ao remover"); return; }
+  const p = await r.json();
+  const i = pecas.findIndex(x=>x.id===id); pecas[i] = p;
+  toast("Foto removida"); renderAdmin();
+}
+
+async function delPeca(id){
+  if(!confirm("Excluir este produto e suas fotos? Esta ação não pode ser desfeita.")) return;
+  const r = await fetch(API+`/api/pecas/${id}`, {method:"DELETE", headers:{"X-Admin-Password":window._senha}});
+  if(!r.ok){ toast("Erro ao excluir"); return; }
+  pecas = pecas.filter(x=>x.id!==id);
+  toast("Produto excluído"); renderAdmin(); renderFiltros(); render();
+}
+
 function esc(s){ return (s||"").replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;'); }
 
 async function salvar(id){

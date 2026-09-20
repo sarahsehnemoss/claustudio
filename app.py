@@ -11,6 +11,7 @@ Rotas:
 import os
 import json
 import uuid
+import shutil
 from pathlib import Path
 
 import requests
@@ -20,13 +21,28 @@ from dotenv import load_dotenv
 load_dotenv()
 
 BASE = Path(__file__).parent
-DATA_FILE = BASE / "pecas.json"
-_fotos_env = os.getenv("FOTOS_DIR", "Fotos.site")
-FOTOS_DIR = Path(_fotos_env)
-if not FOTOS_DIR.is_absolute():
-    FOTOS_DIR = BASE / FOTOS_DIR
-if not FOTOS_DIR.exists():
-    FOTOS_DIR = BASE / "Fotos.site"
+
+# DATA_DIR: diretório persistente (Volume no Railway). Default = BASE (local).
+# FOTOS_DIR e pecas.json ficam dentro de DATA_DIR pra sobreviverem a redeploys.
+DATA_DIR = Path(os.getenv("DATA_DIR", "")).resolve() if os.getenv("DATA_DIR") else BASE
+FOTOS_DIR = DATA_DIR / "Fotos.site"
+DATA_FILE = DATA_DIR / "pecas.json"
+
+def _seed():
+    """Na primeira vez (volume vazio), copia fotos e pecas.json do repo pro volume."""
+    if DATA_DIR == BASE:
+        return  # local: não precisa seed
+    repo_fotos = BASE / "Fotos.site"
+    repo_data = BASE / "pecas.json"
+    if not FOTOS_DIR.exists() and repo_fotos.exists():
+        shutil.copytree(repo_fotos, FOTOS_DIR)
+        print(f"  [seed] fotos copiadas pra {FOTOS_DIR}")
+    if not DATA_FILE.exists() and repo_data.exists():
+        shutil.copy2(repo_data, DATA_FILE)
+        print(f"  [seed] pecas.json copiado pra {DATA_FILE}")
+
+_seed()
+
 MP_ACCESS_TOKEN = os.getenv("MP_ACCESS_TOKEN", "")
 ADMIN_PASSWORD = os.getenv("ADMIN_PASSWORD", "claustudio2026")
 SITE_URL = os.getenv("SITE_URL", "").rstrip("/")  # ex.: https://claustudio.com.br
@@ -171,6 +187,129 @@ def update_peca(pid):
                 p["vendido"] = bool(data["vendido"])
             save_pecas(pecas)
             return jsonify(p)
+    return jsonify({"error": "peça não encontrada"}), 404
+
+
+def _slug(nome):
+    """Converte nome de produto em nome de pasta seguro."""
+    import re
+    s = nome.strip().lower()
+    s = re.sub(r"[^\w\s-]", "", s, flags=re.UNICODE)
+    s = re.sub(r"[\s_]+", "-", s)
+    return s or "peca"
+
+
+@app.route("/api/pecas/nova", methods=["POST"])
+def nova_peca():
+    """Cria um produto novo com fotos enviadas (multipart)."""
+    if not is_admin():
+        return jsonify({"error": "não autorizado"}), 401
+    nome = (request.form.get("nome") or "").strip() or "Nova peça"
+    pasta = _slug(nome)
+    # garante pasta única
+    base_pasta = pasta
+    i = 2
+    while (FOTOS_DIR / pasta).exists():
+        pasta = f"{base_pasta}-{i}"; i += 1
+    dest = FOTOS_DIR / pasta
+    dest.mkdir(parents=True, exist_ok=True)
+    fotos = []
+    arquivos = request.files.getlist("fotos")
+    for f in arquivos:
+        if not f or not f.filename:
+            continue
+        ext = Path(f.filename).suffix.lower()
+        if ext not in EXTS:
+            continue
+        fname = f"foto-{uuid.uuid4().hex[:6]}{ext}"
+        f.save(dest / fname)
+        fotos.append(fname)
+    if not fotos:
+        # sem fotos = cria pasta vazia mesmo assim
+        pass
+    pecas = load_pecas()
+    p = {
+        "id": uuid.uuid4().hex[:8],
+        "pasta": pasta,
+        "nome": nome,
+        "categoria": (request.form.get("categoria") or "").strip(),
+        "material": (request.form.get("material") or "").strip(),
+        "descricao": (request.form.get("descricao") or "").strip(),
+        "preco": _num_form(request.form.get("preco")),
+        "estoque": 1,
+        "visivel": request.form.get("visivel") != "false",
+        "vendido": False,
+        "fotos": fotos,
+    }
+    pecas.append(p)
+    save_pecas(pecas)
+    return jsonify(p)
+
+
+def _num_form(v):
+    try:
+        return round(float((v or "0").replace(",", ".")), 2)
+    except (ValueError, TypeError):
+        return 0.0
+
+
+@app.route("/api/pecas/<pid>/foto", methods=["POST"])
+def add_foto(pid):
+    """Adiciona uma foto a um produto existente."""
+    if not is_admin():
+        return jsonify({"error": "não autorizado"}), 401
+    pecas = load_pecas()
+    for p in pecas:
+        if p["id"] == pid:
+            arquivos = request.files.getlist("fotos")
+            for f in arquivos:
+                if not f or not f.filename:
+                    continue
+                ext = Path(f.filename).suffix.lower()
+                if ext not in EXTS:
+                    continue
+                fname = f"foto-{uuid.uuid4().hex[:6]}{ext}"
+                f.save(FOTOS_DIR / p["pasta"] / fname)
+                p.setdefault("fotos", []).append(fname)
+            save_pecas(pecas)
+            return jsonify(p)
+    return jsonify({"error": "peça não encontrada"}), 404
+
+
+@app.route("/api/pecas/<pid>/foto/<int:idx>", methods=["DELETE"])
+def del_foto(pid, idx):
+    """Remove uma foto de um produto."""
+    if not is_admin():
+        return jsonify({"error": "não autorizado"}), 401
+    pecas = load_pecas()
+    for p in pecas:
+        if p["id"] == pid:
+            fotos = p.get("fotos") or []
+            if 0 <= idx < len(fotos):
+                caminho = FOTOS_DIR / p["pasta"] / fotos[idx]
+                if caminho.exists():
+                    caminho.unlink()
+                fotos.pop(idx)
+                p["fotos"] = fotos
+                save_pecas(pecas)
+            return jsonify(p)
+    return jsonify({"error": "peça não encontrada"}), 404
+
+
+@app.route("/api/pecas/<pid>", methods=["DELETE"])
+def del_peca(pid):
+    """Exclui um produto e suas fotos."""
+    if not is_admin():
+        return jsonify({"error": "não autorizado"}), 401
+    pecas = load_pecas()
+    for i, p in enumerate(pecas):
+        if p["id"] == pid:
+            pasta = FOTOS_DIR / p.get("pasta", "")
+            if pasta.exists():
+                shutil.rmtree(pasta)
+            pecas.pop(i)
+            save_pecas(pecas)
+            return jsonify({"ok": True})
     return jsonify({"error": "peça não encontrada"}), 404
 
 
