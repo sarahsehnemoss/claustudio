@@ -30,6 +30,8 @@ if not FOTOS_DIR.exists():
 MP_ACCESS_TOKEN = os.getenv("MP_ACCESS_TOKEN", "")
 ADMIN_PASSWORD = os.getenv("ADMIN_PASSWORD", "claustudio2026")
 SITE_URL = os.getenv("SITE_URL", "").rstrip("/")  # ex.: https://claustudio.com.br
+FRETE_FIXO = float(os.getenv("FRETE_FIXO", "0") or 0)  # ex.: 35.00
+FRETE_GRATIS_ACIMA = float(os.getenv("FRETE_GRATIS_ACIMA", "0") or 0)  # ex.: 500.00
 
 app = Flask(__name__)
 
@@ -191,13 +193,26 @@ def checkout():
         }
         for it in items
     ]
+    # frete fixo como item no checkout (modo custom — não precisa de Mercado Envios/me2)
+    subtotal = sum(float(it["preco"]) * int(it["qtd"]) for it in items)
+    frete = 0.0
+    if FRETE_FIXO > 0:
+        if FRETE_GRATIS_ACIMA > 0 and subtotal >= FRETE_GRATIS_ACIMA:
+            frete = 0.0  # frete grátis acima do threshold
+        else:
+            frete = FRETE_FIXO
+    if frete > 0:
+        mp_items.append({
+            "title": "Frete (envio PAC/SEDEX)",
+            "quantity": 1,
+            "unit_price": round(frete, 2),
+            "currency_id": "BRL",
+        })
+
     base = SITE_URL or request.host_url.rstrip("/")
-    # Mercado Envios: frete automático (PAC/SEDEX) calculado no checkout pelo CEP do comprador.
-    # dimensions no formato "altura x largura x comprimento, peso_gramas" (cm, g).
-    dims = os.getenv("MP_DIMENSIONS", "20x20x20,1000")
-    base_payload = {
+    payload = {
         "items": mp_items,
-        "statement_descriptor": "CLAUSTUDIO",
+        "statement_descriptor": "CLAU STUDIO",
         "back_urls": {
             "success": base + "/?status=success",
             "failure": base + "/?status=failure",
@@ -205,34 +220,26 @@ def checkout():
         },
         "auto_return": "approved",
     }
-    # tenta com Mercado Envios (me2); se a conta não tiver me2 ativo, cai pra sem frete.
-    payloads = [
-        {**base_payload, "shipments": {"mode": "me2", "dimensions": dims}},
-        base_payload,  # fallback: sem frete (combinar entrega por WhatsApp)
-    ]
     headers = {
         "Authorization": f"Bearer {MP_ACCESS_TOKEN}",
         "Content-Type": "application/json",
     }
-    last_err = ""
-    for payload in payloads:
-        try:
-            r = requests.post(
-                "https://api.mercadopago.com/checkout/preferences",
-                headers=headers, json=payload, timeout=20,
-            )
-        except requests.RequestException as e:
-            return jsonify({"error": f"falha de conexão: {e}"}), 502
-        if r.status_code < 400:
-            data = r.json()
-            return jsonify(
-                {
-                    "init_point": data.get("init_point"),
-                    "sandbox_init_point": data.get("sandbox_init_point"),
-                }
-            )
-        last_err = r.text
-    return jsonify({"error": "Mercado Pago: " + last_err}), 502
+    try:
+        r = requests.post(
+            "https://api.mercadopago.com/checkout/preferences",
+            headers=headers, json=payload, timeout=20,
+        )
+    except requests.RequestException as e:
+        return jsonify({"error": f"falha de conexão: {e}"}), 502
+    if r.status_code >= 400:
+        return jsonify({"error": "Mercado Pago: " + r.text}), 502
+    data = r.json()
+    return jsonify(
+        {
+            "init_point": data.get("init_point"),
+            "sandbox_init_point": data.get("sandbox_init_point"),
+        }
+    )
 
 
 if __name__ == "__main__":
