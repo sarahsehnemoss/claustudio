@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Claustudio · Cerâmicas feitas à mão</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --areia:#F4EEE3; --areia-2:#EDE4D3; --creme:#FBF7F0;
+    --argila:#B5651D; --terracota:#9C4A1A; --tinta:#2B2118; --tinta-2:#5C4E3F;
+    --linha:#D9CDB8; --sombra:0 18px 40px -22px rgba(43,33,24,.45);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:'Inter',sans-serif;background:var(--areia);color:var(--tinta);line-height:1.6}
+  h1,h2,h3,h4{font-family:'Cormorant Garamond',serif;font-weight:600;line-height:1.15}
+  a{color:inherit;text-decoration:none}
+  img{display:block;max-width:100%}
+  .wrap{max-width:1180px;margin:0 auto;padding:0 24px}
+
+  /* topo */
+  header{position:sticky;top:0;z-index:40;background:rgba(244,238,227,.92);backdrop-filter:blur(10px);border-bottom:1px solid var(--linha)}
+  .topo{display:flex;align-items:center;justify-content:space-between;height:72px}
+  .marca{font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:700;letter-spacing:.04em;color:var(--terracota)}
+  .marca span{color:var(--tinta)}
+  nav{display:flex;gap:28px;align-items:center}
+  nav a{font-size:14px;font-weight:500;color:var(--tinta-2);transition:.2s}
+  nav a:hover{color:var(--terracota)}
+  .btn-icone{background:none;border:1px solid var(--linha);border-radius:50%;width:42px;height:42px;cursor:pointer;display:grid;place-items:center;color:var(--tinta);transition:.2s;position:relative}
+  .btn-icone:hover{border-color:var(--argila);color:var(--argila)}
+  .badge{position:absolute;top:-4px;right:-4px;background:var(--terracota);color:#fff;font-size:11px;font-weight:600;min-width:18px;height:18px;border-radius:9px;display:grid;place-items:center;padding:0 5px}
+  .acoes{display:flex;gap:10px;align-items:center}
+
+  /* hero */
+  .hero{padding:80px 0 60px;text-align:center}
+  .hero h1{font-size:clamp(40px,7vw,76px);color:var(--tinta);letter-spacing:.01em}
+  .hero h1 em{font-style:italic;color:var(--terracota)}
+  .hero p{max-width:560px;margin:22px auto 0;color:var(--tinta-2);font-size:17px}
+  .hero .linha-deco{width:60px;height:2px;background:var(--argila);margin:28px auto 0}
+
+  /* filtros */
+  .filtros{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin:36px 0 8px}
+  .chip{padding:8px 18px;border:1px solid var(--linha);border-radius:999px;background:var(--creme);font-size:13px;font-weight:500;color:var(--tinta-2);cursor:pointer;transition:.2s}
+  .chip:hover{border-color:var(--argila)}
+  .chip.ativo{background:var(--tinta);color:var(--creme);border-color:var(--tinta)}
+
+  /* grid */
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:28px;padding:28px 0 80px}
+  .card{background:var(--creme);border-radius:14px;overflow:hidden;box-shadow:var(--sombra);transition:.25s;cursor:pointer;display:flex;flex-direction:column}
+  .card:hover{transform:translateY(-6px);box-shadow:0 26px 50px -24px rgba(43,33,24,.55)}
+  .card .foto{aspect-ratio:4/5;background:var(--areia-2);overflow:hidden}
+  .card .foto img{width:100%;height:100%;object-fit:cover;transition:.4s}
+  .card:hover .foto img{transform:scale(1.05)}
+  .card .corpo{padding:16px 18px 20px;display:flex;flex-direction:column;gap:6px;flex:1}
+  .card .cat{font-size:11px;text-transform:uppercase;letter-spacing:.12em;color:var(--argila);font-weight:600}
+  .card h3{font-size:22px;color:var(--tinta)}
+  .card .preco{margin-top:auto;font-size:18px;font-weight:600;color:var(--terracota);padding-top:8px}
+  .card .add{margin-top:12px;background:var(--tinta);color:var(--creme);border:none;border-radius:8px;padding:10px;font-size:13px;font-weight:600;cursor:pointer;transition:.2s;font-family:inherit}
+  .card .add:hover{background:var(--terracota)}
+  .vazio{text-align:center;padding:80px 0;color:var(--tinta-2)}
+  .vazio h3{font-size:28px;margin-bottom:8px}
+
+  /* modal peça */
+  .modal-fundo{position:fixed;inset:0;background:rgba(43,33,24,.6);z-index:60;display:none;place-items:center;padding:20px;backdrop-filter:blur(4px)}
+  .modal-fundo.aberto{display:grid}
+  .modal{background:var(--creme);border-radius:16px;max-width:880px;width:100%;max-height:90vh;overflow:auto;display:grid;grid-template-columns:1fr 1fr;gap:0}
+  .modal img{width:100%;height:100%;object-fit:cover;min-height:320px}
+  .modal .det{padding:36px 32px;display:flex;flex-direction:column;gap:14px}
+  .modal .det .cat{font-size:11px;text-transform:uppercase;letter-spacing:.12em;color:var(--argila);font-weight:600}
+  .modal .det h2{font-size:38px;color:var(--tinta)}
+  .modal .det .preco{font-size:26px;font-weight:600;color:var(--terracota)}
+  .modal .det p{color:var(--tinta-2);font-size:15px}
+  .modal .det .add-grande{margin-top:10px;background:var(--tinta);color:var(--creme);border:none;border-radius:10px;padding:14px;font-size:15px;font-weight:600;cursor:pointer;transition:.2s;font-family:inherit}
+  .modal .det .add-grande:hover{background:var(--terracota)}
+  .fechar{position:absolute;top:18px;right:18px;background:rgba(255,255,255,.9);border:none;width:38px;height:38px;border-radius:50%;cursor:pointer;font-size:18px;z-index:2}
+  @media(max-width:700px){.modal{grid-template-columns:1fr}.modal img{min-height:260px}}
+
+  /* carrinho */
+  .gaveta{position:fixed;top:0;right:0;height:100%;width:400px;max-width:92vw;background:var(--creme);z-index:70;transform:translateX(100%);transition:.3s;display:flex;flex-direction:column;box-shadow:-20px 0 50px -20px rgba(0,0,0,.4)}
+  .gaveta.aberta{transform:none}
+  .gaveta .cabecalho{display:flex;justify-content:space-between;align-items:center;padding:22px 24px;border-bottom:1px solid var(--linha)}
+  .gaveta .cabecalho h3{font-size:24px}
+  .gaveta .itens{flex:1;overflow:auto;padding:18px 24px}
+  .item{display:flex;gap:14px;padding:14px 0;border-bottom:1px solid var(--areia-2)}
+  .item img{width:72px;height:80px;object-fit:cover;border-radius:8px}
+  .item .info{flex:1;display:flex;flex-direction:column;gap:4px}
+  .item .info h4{font-size:16px;font-family:'Inter',sans-serif;font-weight:600}
+  .item .info .p{font-size:14px;color:var(--terracota);font-weight:600}
+  .qty{display:flex;align-items:center;gap:8px;margin-top:4px}
+  .qty button{width:26px;height:26px;border:1px solid var(--linha);background:var(--areia);border-radius:6px;cursor:pointer;font-size:14px}
+  .item .remover{background:none;border:none;color:var(--tinta-2);cursor:pointer;font-size:12px;text-decoration:underline;margin-top:4px;align-self:flex-start}
+  .gaveta .rodape{padding:22px 24px;border-top:1px solid var(--linha);background:var(--areia)}
+  .gaveta .rodape .total{display:flex;justify-content:space-between;font-size:15px;margin-bottom:14px}
+  .gaveta .rodape .total strong{font-size:20px;color:var(--terracota)}
+  .finalizar{width:100%;background:var(--tinta);color:var(--creme);border:none;border-radius:10px;padding:15px;font-size:15px;font-weight:600;cursor:pointer;font-family:inherit;transition:.2s}
+  .finalizar:hover{background:var(--terracota)}
+  .finalizar:disabled{opacity:.5;cursor:not-allowed}
+  .carrinho-vazio{color:var(--tinta-2);text-align:center;padding:40px 0}
+
+  /* admin */
+  .admin-fundo{position:fixed;inset:0;background:rgba(43,33,24,.7);z-index:80;display:none;place-items:center;padding:20px}
+  .admin-fundo.aberto{display:grid}
+  .admin{background:var(--creme);border-radius:16px;max-width:1000px;width:100%;max-height:92vh;overflow:auto;padding:30px}
+  .admin h2{font-size:30px;margin-bottom:6px}
+  .admin .sub{color:var(--tinta-2);font-size:14px;margin-bottom:22px}
+  .login{display:flex;flex-direction:column;gap:12px;max-width:340px;margin:30px auto}
+  .login input{padding:12px 14px;border:1px solid var(--linha);border-radius:8px;font-family:inherit;font-size:14px}
+  .login button{padding:12px;background:var(--tinta);color:var(--creme);border:none;border-radius:8px;cursor:pointer;font-weight:600;font-family:inherit}
+  table{width:100%;border-collapse:collapse;font-size:13px}
+  th{text-align:left;padding:10px 8px;border-bottom:2px solid var(--linha);font-weight:600;color:var(--tinta-2);font-size:11px;text-transform:uppercase;letter-spacing:.08em}
+  td{padding:8px;border-bottom:1px solid var(--areia-2);vertical-align:middle}
+  td input,td textarea{width:100%;padding:6px 8px;border:1px solid var(--linha);border-radius:6px;font-family:inherit;font-size:13px;background:var(--areia)}
+  td .mini{width:70px}
+  td .check{width:auto}
+  .thumb{width:48px;height:54px;object-fit:cover;border-radius:6px}
+  .salvar-linha{background:var(--argila);color:#fff;border:none;border-radius:6px;padding:6px 10px;cursor:pointer;font-size:12px;font-weight:600}
+  .admin .fechar-admin{float:right;background:none;border:none;font-size:22px;cursor:pointer;color:var(--tinta-2)}
+
+  /* toast */
+  .toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(20px);background:var(--tinta);color:var(--creme);padding:13px 22px;border-radius:10px;font-size:14px;z-index:90;opacity:0;transition:.3s;pointer-events:none}
+  .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+
+  /* status banner */
+  .banner{padding:14px 24px;text-align:center;font-weight:500}
+  .banner.ok{background:#DCEAD3;color:#2D5A27}
+  .banner.erro{background:#F3D9D3;color:#8A2A1A}
+  .banner.pendente{background:#F5E6C8;color:#7A5A12}
+
+  footer{border-top:1px solid var(--linha);padding:40px 0;text-align:center;color:var(--tinta-2);font-size:13px}
+  footer .marca{display:inline-block;font-size:22px;margin-bottom:8px}
+</style>
+</head>
+<body>
+
+<div id="banner"></div>
+
+<header>
+  <div class="wrap topo">
+    <a href="#" class="marca">claus<span>tudio</span></a>
+    <nav>
+      <a href="#catalogo">Catálogo</a>
+      <a href="#sobre">Sobre</a>
+      <a href="#contato">Contato</a>
+      <div class="acoes">
+        <button class="btn-icone" onclick="abrirAdmin()" title="Admin">⚙</button>
+        <button class="btn-icone" onclick="abrirGaveta()" title="Carrinho">🛒<span class="badge" id="badge" style="display:none">0</span></button>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<section class="hero wrap">
+  <h1>Cerâmicas feitas <em>à mão</em></h1>
+  <p>Peças únicas, modeladas e queimadas no estúdio. Cada forma carrega a marca do tempo e do fogo.</p>
+  <div class="linha-deco"></div>
+</section>
+
+<section id="catalogo" class="wrap">
+  <div class="filtros" id="filtros"></div>
+  <div class="grid" id="grid"></div>
+</section>
+
+<section id="sobre" class="wrap" style="padding:40px 0 60px">
+  <h2 style="font-size:36px;text-align:center;margin-bottom:20px">Sobre o estúdio</h2>
+  <p style="max-width:620px;margin:0 auto;text-align:center;color:var(--tinta-2)">O Claustudio é um ateliê de cerâmica onde cada peça é construída lentamente, do barro ao esmalte, passando pelo fogo. Trabalhamos em pequenas séries e peças autorais.</p>
+</section>
+
+<footer id="contato">
+  <div class="marca">claus<span style="color:var(--tinta)">tudio</span></div>
+  <p>claustudio.com.br · cerâmicas feitas à mão</p>
+  <p style="margin-top:6px;opacity:.7">© 2026 Claustudio</p>
+</footer>
+
+<!-- modal peça -->
+<div class="modal-fundo" id="modal" onclick="if(event.target===this)fecharModal()">
+  <div class="modal" style="position:relative">
+    <button class="fechar" onclick="fecharModal()">✕</button>
+    <img id="m-img" src="" alt="">
+    <div class="det">
+      <span class="cat" id="m-cat"></span>
+      <h2 id="m-nome"></h2>
+      <div class="preco" id="m-preco"></div>
+      <p id="m-desc"></p>
+      <button class="add-grande" id="m-add">Adicionar ao carrinho</button>
+    </div>
+  </div>
+</div>
+
+<!-- gaveta carrinho -->
+<div class="gaveta" id="gaveta">
+  <div class="cabecalho">
+    <h3>Seu carrinho</h3>
+    <button class="btn-icone" onclick="fecharGaveta()">✕</button>
+  </div>
+  <div class="itens" id="itens"></div>
+  <div class="rodape">
+    <div class="total"><span>Total</span><strong id="total">R$ 0,00</strong></div>
+    <button class="finalizar" id="finalizar" onclick="finalizar()">Finalizar no Mercado Pago</button>
+  </div>
+</div>
+
+<!-- admin -->
+<div class="admin-fundo" id="admin" onclick="if(event.target===this)fecharAdmin()">
+  <div class="admin">
+    <button class="fechar-admin" onclick="fecharAdmin()">✕</button>
+    <h2>Painel do estúdio</h2>
+    <div class="sub" id="admin-sub">Edite nome, categoria, preço e descrição de cada peça. Marque “visível” para publicar na vitrine.</div>
+    <div id="admin-corpo"></div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+const API = "";
+let pecas = [], carrinho = [], filtro = "todas", adminLogado = false;
+
+const fmt = v => "R$ " + Number(v).toFixed(2).replace(".", ",");
+const toast = (m) => { const t=document.getElementById("toast"); t.textContent=m; t.classList.add("show"); setTimeout(()=>t.classList.remove("show"),2200); };
+
+async function carregar(){
+  const r = await fetch(API + "/api/pecas");
+  pecas = await r.json();
+  renderFiltros();
+  render();
+}
+
+function renderFiltros(){
+  const cats = [...new Set(pecas.map(p=>p.categoria).filter(Boolean))];
+  const el = document.getElementById("filtros");
+  el.innerHTML = `<button class="chip ${filtro==='todas'?'ativo':''}" onclick="setFiltro('todas')">Todas</button>` +
+    cats.map(c=>`<button class="chip ${filtro===c?'ativo':''}" onclick="setFiltro('${c}')">${c}</button>`).join("");
+}
+function setFiltro(c){ filtro=c; renderFiltros(); render(); }
+
+function render(){
+  const grid = document.getElementById("grid");
+  const lista = filtro==="todas" ? pecas : pecas.filter(p=>p.categoria===filtro);
+  if(!lista.length){
+    grid.innerHTML = `<div class="vazio"><h3>Vitro ainda vazio</h3><p>Use o painel do estúdio (⚙) para publicar as peças.</p></div>`;
+    return;
+  }
+  grid.innerHTML = lista.map(p=>`
+    <div class="card" onclick="abrirModal('${p.id}')">
+      <div class="foto"><img src="${API}/foto/${p.id}" alt="${p.nome}" loading="lazy"></div>
+      <div class="corpo">
+        ${p.categoria?`<span class="cat">${p.categoria}</span>`:""}
+        <h3>${p.nome}</h3>
+        <div class="preco">${fmt(p.preco)}</div>
+        <button class="add" onclick="event.stopPropagation();add('${p.id}')">Adicionar</button>
+      </div>
+    </div>`).join("");
+}
+
+function abrirModal(id){
+  const p = pecas.find(x=>x.id===id); if(!p) return;
+  document.getElementById("m-img").src = API + "/foto/" + id;
+  document.getElementById("m-cat").textContent = p.categoria || "";
+  document.getElementById("m-nome").textContent = p.nome;
+  document.getElementById("m-preco").textContent = fmt(p.preco);
+  document.getElementById("m-desc").textContent = p.descricao || "Peça única, feita à mão no Claustudio.";
+  document.getElementById("m-add").onclick = () => { add(id); fecharModal(); };
+  document.getElementById("modal").classList.add("aberto");
+}
+function fecharModal(){ document.getElementById("modal").classList.remove("aberto"); }
+
+function add(id){
+  const p = pecas.find(x=>x.id===id); if(!p) return;
+  const it = carrinho.find(x=>x.id===id);
+  if(it) it.qtd++; else carrinho.push({id, nome:p.nome, preco:p.preco, qtd:1});
+  renderCarrinho();
+  toast(p.nome + " adicionada");
+}
+function rm(id){ carrinho = carrinho.filter(x=>x.id!==id); renderCarrinho(); }
+function qtd(id,d){ const it=carrinho.find(x=>x.id===id); if(!it) return; it.qtd+=d; if(it.qtd<1) rm(id); else renderCarrinho(); }
+
+function renderCarrinho(){
+  const el = document.getElementById("itens");
+  const n = carrinho.reduce((s,x)=>s+x.qtd,0);
+  const badge = document.getElementById("badge");
+  badge.textContent = n; badge.style.display = n? "grid":"none";
+  if(!carrinho.length){ el.innerHTML = `<div class="carrinho-vazio">Seu carrinho está vazio</div>`; }
+  else{
+    el.innerHTML = carrinho.map(it=>`
+      <div class="item">
+        <img src="${API}/foto/${it.id}" alt="">
+        <div class="info">
+          <h4>${it.nome}</h4>
+          <div class="p">${fmt(it.preco)}</div>
+          <div class="qty"><button onclick="qtd('${it.id}',-1)">−</button><span>${it.qtd}</span><button onclick="qtd('${it.id}',1)">+</button></div>
+          <button class="remover" onclick="rm('${it.id}')">remover</button>
+        </div>
+      </div>`).join("");
+  }
+  const total = carrinho.reduce((s,x)=>s+x.preco*x.qtd,0);
+  document.getElementById("total").textContent = fmt(total);
+}
+function abrirGaveta(){ document.getElementById("gaveta").classList.add("aberta"); }
+function fecharGaveta(){ document.getElementById("gaveta").classList.remove("aberta"); }
+
+async function finalizar(){
+  if(!carrinho.length) return;
+  const btn = document.getElementById("finalizar");
+  btn.disabled = true; btn.textContent = "Preparando pagamento...";
+  try{
+    const r = await fetch(API+"/api/checkout", {
+      method:"POST", headers:{"Content-Type":"application/json"},
+      body: JSON.stringify({items: carrinho.map(x=>({nome:x.nome, preco:x.preco, qtd:x.qtd}))})
+    });
+    const d = await r.json();
+    if(!r.ok){ toast(d.error || "Erro ao criar pagamento"); btn.disabled=false; btn.textContent="Finalizar no Mercado Pago"; return; }
+    const url = d.sandbox_init_point || d.init_point;
+    if(!url){ toast("Nenhuma URL de pagamento retornada"); btn.disabled=false; btn.textContent="Finalizar no Mercado Pago"; return; }
+    window.location.href = url;
+  }catch(e){ toast("Falha de conexão"); btn.disabled=false; btn.textContent="Finalizar no Mercado Pago"; }
+}
+
+/* admin */
+function abrirAdmin(){ document.getElementById("admin").classList.add("aberto"); if(!adminLogado) renderLogin(); else renderAdmin(); }
+function fecharAdmin(){ document.getElementById("admin").classList.remove("aberto"); }
+
+function renderLogin(){
+  document.getElementById("admin-corpo").innerHTML = `
+    <div class="login">
+      <p style="text-align:center;color:var(--tinta-2)">Digite a senha do estúdio</p>
+      <input type="password" id="senha" placeholder="Senha" onkeydown="if(event.key==='Enter')entrar()">
+      <button onclick="entrar()">Entrar</button>
+    </div>`;
+}
+async function entrar(){
+  const s = document.getElementById("senha").value;
+  const r = await fetch(API+"/api/pecas?admin=1", {headers:{"X-Admin-Password":s}});
+  if(!r.ok){ toast("Senha incorreta"); return; }
+  adminLogado = true; window._senha = s; pecas = await r.json();
+  renderAdmin(); toast("Painel aberto");
+}
+
+function renderAdmin(){
+  const corpo = document.getElementById("admin-corpo");
+  corpo.innerHTML = `
+    <table>
+      <thead><tr><th></th><th>Nome</th><th>Categoria</th><th>Preço</th><th>Estoque</th><th>Visível</th><th>Descrição</th><th></th></tr></thead>
+      <tbody>
+        ${pecas.map(p=>`
+          <tr data-id="${p.id}">
+            <td><img class="thumb" src="${API}/foto/${p.id}" alt=""></td>
+            <td><input value="${esc(p.nome)}" data-k="nome"></td>
+            <td><input value="${esc(p.categoria)}" data-k="categoria"></td>
+            <td><input class="mini" type="number" step="0.01" value="${p.preco}" data-k="preco"></td>
+            <td><input class="mini" type="number" value="${p.estoque}" data-k="estoque"></td>
+            <td><input class="check" type="checkbox" ${p.visivel?'checked':''} data-k="visivel"></td>
+            <td><textarea rows="2" data-k="descricao">${esc(p.descricao)}</textarea></td>
+            <td><button class="salvar-linha" onclick="salvar('${p.id}')">Salvar</button></td>
+          </tr>`).join("")}
+      </tbody>
+    </table>`;
+}
+function esc(s){ return (s||"").replace(/"/g,'&quot;').replace(/</g,'&lt;'); }
+
+async function salvar(id){
+  const tr = document.querySelector(`tr[data-id="${id}"]`);
+  const body = {};
+  tr.querySelectorAll("[data-k]").forEach(el=>{
+    body[el.dataset.k] = el.type==="checkbox" ? el.checked : el.value;
+  });
+  const r = await fetch(API+"/api/pecas/"+id, {
+    method:"POST", headers:{"Content-Type":"application/json","X-Admin-Password":window._senha},
+    body: JSON.stringify(body)
+  });
+  if(!r.ok){ toast("Erro ao salvar"); return; }
+  const atual = await r.json();
+  const i = pecas.findIndex(x=>x.id===id); pecas[i] = atual;
+  toast("Peça atualizada");
+  renderFiltros(); render();
+}
+
+/* status de retorno MP */
+const st = new URLSearchParams(location.search).get("status");
+if(st){
+  const b = document.getElementById("banner");
+  const map = {success:["ok","Pagamento aprovado! Obrigada."],failure:["erro","O pagamento não foi aprovado."],pending:["pendente","Pagamento pendente — você receberá a confirmação em breve."]};
+  if(map[st]){ b.className = "banner " + map[st][0]; b.textContent = map[st][1]; }
+}
+
+carregar();
+</script>
+</body>
+</html>

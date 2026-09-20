@@ -1,0 +1,382 @@
+[
+  {
+    "id": "96bde806",
+    "arquivo": "WhatsApp Image 2026-09-20 at 14.08.35.jpeg",
+    "nome": "Peça 01",
+    "categoria": "",
+    "descricao": "",
+    "preco": 50.0,
+    "estoque": 1,
+    "visivel": true
+  },
+  {
+    "id": "e6c28944",
+    "arquivo": "WhatsApp Image 2026-09-20 at 14.08.36 (1).jpeg",
+    "nome": "Peça 02",
+    "categoria": "",
+    "descricao": "",
+    "preco": 50.0,
+    "estoque": 1,
+    "visivel": true
+  },
+  {
+    "id": "880f2338",
+    "arquivo": "WhatsApp Image 2026-09-20 at 14.08.36 (2).jpeg",
+    "nome": "Peça 03",
+    "categoria": "",
+    "descricao": "",
+    "preco": 50.0,
+    "estoque": 1,
+    "visivel": true
+  },
+  {
+    "id": "214170d6",
+    "arquivo": "WhatsApp Image 2026-09-20 at 14.08.36.jpeg",
+    "nome": "Peça 04",
+    "categoria": "",
+    "descricao": "",
+    "preco": 50.0,
+    "estoque": 1,
+    "visivel": true
+  },
+  {
+    "id": "80118431",
+    "arquivo": "WhatsApp Image 2026-09-20 at 14.08.37.jpeg",
+    "nome": "Peça 05",
+    "categoria": "",
+    "descricao": "",
+    "preco": 50.0,
+    "estoque": 1,
+    "visivel": true
+  },
+  {
+    "id": "cbe41d94",
+    "arquivo": "WhatsApp Image 2026-09-20 at 14.08.38.jpeg",
+    "nome": "Peça 06",
+    "categoria": "",
+    "descricao": "",
+    "preco": 50.0,
+    "estoque": 1,
+    "visivel": true
+  },
+  {
+    "id": "7f08e81f",
+    "arquivo": "WhatsApp Image 2026-09-20 at 14.08.39.jpeg",
+    "nome": "Peça 07",
+    "categoria": "",
+    "descricao": "",
+    "preco": 50.0,
+    "estoque": 1,
+    "visivel": true
+  },
+  {
+    "id": "cb8f80dc",
+    "arquivo": "WhatsApp Image 2026-09-20 at 14.08.41 (1).jpeg",
+    "nome": "Peça 08",
+    "categoria": "",
+    "descricao": "",
+    "preco": 50.0,
+    "estoque": 1,
+    "visivel": true
+  },
+  {
+    "id": "f20f91ba",
+    "arquivo": "WhatsApp Image 2026-09-20 at 14.08.41.jpeg",
+    "nome": "Peça 09",
+    "categoria": "",
+    "descricao": "",
+    "preco": 50.0,
+    "estoque": 1,
+    "visivel": true
+  },
+  {
+    "id": "52006dab",
+    "arquivo": "WhatsApp Image 2026-09-20 at 14.08.42.jpeg",
+    "nome": "Peça 10",
+    "categoria": "",
+    "descricao": "",
+    "preco": 50.0,
+    "estoque": 1,
+    "visivel": true
+  },
+  {
+    "id": "9d1c5196",
+    "arquivo": "WhatsApp Image 2026-09-20 at 14.08.45.jpeg",
+    "nome": "Peça 11",
+    "categoria": "",
+    "descricao": "",
+    "preco": 50.0,
+    "estoque": 1,
+    "visivel": true
+  },
+  {
+    "id": "b514c6a5",
+    "arquivo": "WhatsApp Image 2026-09-20 at 14.08.46.jpeg",
+    "nome": "Peça 12",
+    "categoria": "",
+    "descricao": "",
+    "preco": 50.0,
+    "estoque": 1,
+    "visivel": true
+  },
+  {
+    "id": "513a03bb",
+    "arquivo": "WhatsApp Image 2026-09-20 at 14.08.54.jpeg",
+    "nome": "Peça 13",
+    "categoria": "",
+    "descricao": "",
+    "preco": 50.0,
+    "estoque": 1,
+    "visivel": true
+  },
+  {
+    "id": "69b52102",
+    "arquivo": "WhatsApp Image 2026-09-20 at 14.08.55 (1).jpeg",
+    "nome": "Peça 14",
+    "categoria": "",
+    "descricao": "",
+    "preco": 50.0,
+    "estoque": 1,
+    "visivel": true
+  },
+  {
+    "id": "0cda21a7",
+    "arquivo": "WhatsApp Image 2026-09-20 at 14.08.55.jpeg",
+    "nome": "Peça 15",
+    "categoria": "",
+    "descricao": "",
+    "preco": 50.0,
+    "estoque": 1,
+    "visivel": true
+  },
+  {
+    "id": "e4ff4291",
+    "arquivo": "WhatsApp Image 2026-09-20 at 14.08.56 (1).jpeg",
+    "nome": "Peça 16",
+    "categoria": "",
+    "descricao": "",
+    "preco": 50.0,
+    "estoque": 1,
+    "visivel": true
+  },
+  {
+    "id": "59abc69c",
+    "arquivo": "WhatsApp Image 2026-09-20 at 14.08.56.jpeg",
+    "nome": "Peça 17",
+    "categoria": "",
+    "descricao": "",
+    "preco": 50.0,
+    "estoque": 1,
+    "visivel": true
+  },
+  {
+    "id": "6ac8b0e9",
+    "arquivo": "WhatsApp Image 2026-09-20 at 14.08.57.jpeg",
+    "nome": "Peça 18",
+    "categoria": "",
+    "descricao": "",
+    "preco": 50.0,
+    "estoque": 1,
+    "visivel": true
+  },
+  {
+    "id": "ceec637b",
+    "arquivo": "WhatsApp Image 2026-09-20 at 14.08.58.jpeg",
+    "nome": "Peça 19",
+    "categoria": "",
+    "descricao": "",
+    "preco": 50.0,
+    "estoque": 1,
+    "visivel": true
+  },
+  {
+    "id": "f0a68275",
+    "arquivo": "WhatsApp Image 2026-09-20 at 14.09.01 (1).jpeg",
+    "nome": "Peça 20",
+    "categoria": "",
+    "descricao": "",
+    "preco": 50.0,
+    "estoque": 1,
+    "visivel": true
+  },
+  {
+    "id": "1c662759",
+    "arquivo": "WhatsApp Image 2026-09-20 at 14.09.01.jpeg",
+    "nome": "Peça 21",
+    "categoria": "",
+    "descricao": "",
+    "preco": 50.0,
+    "estoque": 1,
+    "visivel": true
+  },
+  {
+    "id": "780a34b1",
+    "arquivo": "WhatsApp Image 2026-09-20 at 14.09.02 (1).jpeg",
+    "nome": "Peça 22",
+    "categoria": "",
+    "descricao": "",
+    "preco": 50.0,
+    "estoque": 1,
+    "visivel": true
+  },
+  {
+    "id": "b88fd5bc",
+    "arquivo": "WhatsApp Image 2026-09-20 at 14.09.02.jpeg",
+    "nome": "Peça 23",
+    "categoria": "",
+    "descricao": "",
+    "preco": 50.0,
+    "estoque": 1,
+    "visivel": true
+  },
+  {
+    "id": "fec0ae34",
+    "arquivo": "WhatsApp Image 2026-09-20 at 14.09.03.jpeg",
+    "nome": "Peça 24",
+    "categoria": "",
+    "descricao": "",
+    "preco": 50.0,
+    "estoque": 1,
+    "visivel": true
+  },
+  {
+    "id": "97b31dbe",
+    "arquivo": "WhatsApp Image 2026-09-20 at 14.09.05.jpeg",
+    "nome": "Peça 25",
+    "categoria": "",
+    "descricao": "",
+    "preco": 50.0,
+    "estoque": 1,
+    "visivel": true
+  },
+  {
+    "id": "94d2d0b7",
+    "arquivo": "WhatsApp Image 2026-09-20 at 14.09.11.jpeg",
+    "nome": "Peça 26",
+    "categoria": "",
+    "descricao": "",
+    "preco": 50.0,
+    "estoque": 1,
+    "visivel": true
+  },
+  {
+    "id": "0db36874",
+    "arquivo": "WhatsApp Image 2026-09-20 at 14.12.40.jpeg",
+    "nome": "Peça 27",
+    "categoria": "",
+    "descricao": "",
+    "preco": 50.0,
+    "estoque": 1,
+    "visivel": true
+  },
+  {
+    "id": "ee52cf53",
+    "arquivo": "WhatsApp Image 2026-09-20 at 14.12.41 (1).jpeg",
+    "nome": "Peça 28",
+    "categoria": "",
+    "descricao": "",
+    "preco": 50.0,
+    "estoque": 1,
+    "visivel": true
+  },
+  {
+    "id": "648558ab",
+    "arquivo": "WhatsApp Image 2026-09-20 at 14.12.41.jpeg",
+    "nome": "Peça 29",
+    "categoria": "",
+    "descricao": "",
+    "preco": 50.0,
+    "estoque": 1,
+    "visivel": true
+  },
+  {
+    "id": "6890e9c7",
+    "arquivo": "WhatsApp Image 2026-09-20 at 14.12.42 (1).jpeg",
+    "nome": "Peça 30",
+    "categoria": "",
+    "descricao": "",
+    "preco": 50.0,
+    "estoque": 1,
+    "visivel": true
+  },
+  {
+    "id": "caf3042b",
+    "arquivo": "WhatsApp Image 2026-09-20 at 14.12.42.jpeg",
+    "nome": "Peça 31",
+    "categoria": "",
+    "descricao": "",
+    "preco": 50.0,
+    "estoque": 1,
+    "visivel": true
+  },
+  {
+    "id": "660f3ae0",
+    "arquivo": "WhatsApp Image 2026-09-20 at 14.12.44.jpeg",
+    "nome": "Peça 32",
+    "categoria": "",
+    "descricao": "",
+    "preco": 50.0,
+    "estoque": 1,
+    "visivel": true
+  },
+  {
+    "id": "a844fc02",
+    "arquivo": "WhatsApp Image 2026-09-20 at 14.12.46.jpeg",
+    "nome": "Peça 33",
+    "categoria": "",
+    "descricao": "",
+    "preco": 50.0,
+    "estoque": 1,
+    "visivel": true
+  },
+  {
+    "id": "3426a907",
+    "arquivo": "WhatsApp Image 2026-09-20 at 14.12.47 (1).jpeg",
+    "nome": "Peça 34",
+    "categoria": "",
+    "descricao": "",
+    "preco": 50.0,
+    "estoque": 1,
+    "visivel": true
+  },
+  {
+    "id": "08d96721",
+    "arquivo": "WhatsApp Image 2026-09-20 at 14.12.47.jpeg",
+    "nome": "Peça 35",
+    "categoria": "",
+    "descricao": "",
+    "preco": 50.0,
+    "estoque": 1,
+    "visivel": true
+  },
+  {
+    "id": "cf5fbf24",
+    "arquivo": "WhatsApp Image 2026-09-20 at 14.12.48 (1).jpeg",
+    "nome": "Peça 36",
+    "categoria": "",
+    "descricao": "",
+    "preco": 50.0,
+    "estoque": 1,
+    "visivel": true
+  },
+  {
+    "id": "00afbf46",
+    "arquivo": "WhatsApp Image 2026-09-20 at 14.12.48.jpeg",
+    "nome": "Peça 37",
+    "categoria": "",
+    "descricao": "",
+    "preco": 50.0,
+    "estoque": 1,
+    "visivel": true
+  },
+  {
+    "id": "a7fad281",
+    "arquivo": "WhatsApp Image 2026-09-20 at 14.12.49.jpeg",
+    "nome": "Peça 38",
+    "categoria": "",
+    "descricao": "",
+    "preco": 50.0,
+    "estoque": 1,
+    "visivel": true
+  }
+]
