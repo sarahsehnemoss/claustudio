@@ -130,6 +130,11 @@ def index():
     return (BASE / "index.html").read_text(encoding="utf-8")
 
 
+@app.route("/links")
+def linktree():
+    return (BASE / "linktree.html").read_text(encoding="utf-8")
+
+
 @app.route("/api/pecas")
 def api_pecas():
     pecas = scan_fotos()
