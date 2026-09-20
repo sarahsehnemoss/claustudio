@@ -250,7 +250,7 @@ def checkout():
         )
     except Exception as e:
         import traceback
-        return jsonify({"error": f"erro interno: {e}", "trace": traceback.format_exc()[-400:]}), 500
+        return jsonify({"error": f"erro interno: {e}", "trace": traceback.format_exc()[-500:]}), 200
 
 
 if __name__ == "__main__":
