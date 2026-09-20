@@ -30,8 +30,19 @@ if not FOTOS_DIR.exists():
 MP_ACCESS_TOKEN = os.getenv("MP_ACCESS_TOKEN", "")
 ADMIN_PASSWORD = os.getenv("ADMIN_PASSWORD", "claustudio2026")
 SITE_URL = os.getenv("SITE_URL", "").rstrip("/")  # ex.: https://claustudio.com.br
-FRETE_FIXO = float(os.getenv("FRETE_FIXO", "0") or 0)  # ex.: 35.00
-FRETE_GRATIS_ACIMA = float(os.getenv("FRETE_GRATIS_ACIMA", "0") or 0)  # ex.: 500.00
+
+def _num(envvar, default=0.0):
+    """Lê um número do env de forma robusta (aceita vírgula ou ponto, nunca quebra)."""
+    v = os.getenv(envvar, "").strip().replace(",", ".")
+    if not v:
+        return default
+    try:
+        return float(v)
+    except ValueError:
+        return default
+
+FRETE_FIXO = _num("FRETE_FIXO", 0.0)          # ex.: 35.00
+FRETE_GRATIS_ACIMA = _num("FRETE_GRATIS_ACIMA", 0.0)  # ex.: 500.00
 
 app = Flask(__name__)
 
