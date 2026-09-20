@@ -9,7 +9,7 @@
 <meta name="description" content="Claustudio — cerâmicas feitas à mão. Peças únicas modeladas e queimadas no estúdio.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant:wght@500;600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
   :root{
     --bg:#FFFFFF; --ink:#111111; --soft:#6B6B6B; --faint:#A8A8A8;
@@ -28,6 +28,9 @@
   header.solid{background:rgba(255,255,255,.96);backdrop-filter:blur(8px);box-shadow:0 1px 0 var(--line)}
   .topo{display:flex;align-items:center;justify-content:space-between;height:80px}
   .marca{font-size:15px;font-weight:500;letter-spacing:.28em;text-transform:uppercase;color:var(--ink)}
+  .logo{display:block;height:auto}
+  .logo.h{width:150px}
+  .logo.f{width:190px}
   nav{display:flex;gap:36px;align-items:center}
   nav a{font-size:12px;font-weight:400;color:var(--soft);transition:.2s;letter-spacing:.14em;text-transform:uppercase}
   nav a:hover{color:var(--ink)}
@@ -189,7 +192,13 @@
 
 <header>
   <div class="wrap topo">
-    <a href="#" class="marca">Claustudio</a>
+    <a href="#" class="marca" aria-label="Clau Studio">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 590 90" class="logo h" role="img" aria-label="Clau Studio">
+        <text x="96" y="62" text-anchor="middle" font-family="'Cormorant', Georgia, serif" font-weight="500" font-size="54" letter-spacing="10" fill="#2A2018">CLAU</text>
+        <circle cx="251" cy="43" r="4.5" fill="#2A2018"/>
+        <text x="441" y="62" text-anchor="middle" font-family="'Cormorant', Georgia, serif" font-weight="500" font-size="54" letter-spacing="10" fill="#2A2018">STUDIO</text>
+      </svg>
+    </a>
     <nav>
       <a href="#catalogo">Catálogo</a>
       <a href="#sobre">Sobre</a>
@@ -225,7 +234,13 @@
 <footer id="contato">
   <div class="ft-wrap">
     <div class="ft-col">
-      <div class="ft-marca">Claustudio</div>
+      <div class="ft-marca">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 590 90" class="logo f" role="img" aria-label="Clau Studio">
+          <text x="96" y="62" text-anchor="middle" font-family="'Cormorant', Georgia, serif" font-weight="500" font-size="54" letter-spacing="10" fill="#2A2018">CLAU</text>
+          <circle cx="251" cy="43" r="4.5" fill="#2A2018"/>
+          <text x="441" y="62" text-anchor="middle" font-family="'Cormorant', Georgia, serif" font-weight="500" font-size="54" letter-spacing="10" fill="#2A2018">STUDIO</text>
+        </svg>
+      </div>
       <p style="max-width:300px;line-height:1.7">Cerâmicas feitas à mão, do barro ao fogo. Peças únicas modeladas e queimadas no estúdio.</p>
     </div>
     <div class="ft-col">
