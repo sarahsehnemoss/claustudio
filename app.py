@@ -187,70 +187,70 @@ def foto(pid, idx=0):
 
 @app.route("/api/checkout", methods=["POST"])
 def checkout():
-    if not MP_ACCESS_TOKEN or MP_ACCESS_TOKEN.startswith("TEST-0000"):
-        return jsonify(
-            {"error": "Mercado Pago ainda não configurado. Edite o .env com seu Access Token."}
-        ), 500
-    items = (request.get_json(force=True) or {}).get("items", [])
-    if not items:
-        return jsonify({"error": "carrinho vazio"}), 400
-
-    mp_items = [
-        {
-            "title": it["nome"][:255],
-            "quantity": int(it["qtd"]),
-            "unit_price": float(it["preco"]),
-            "currency_id": "BRL",
-        }
-        for it in items
-    ]
-    # frete fixo como item no checkout (modo custom — não precisa de Mercado Envios/me2)
-    subtotal = sum(float(it["preco"]) * int(it["qtd"]) for it in items)
-    frete = 0.0
-    if FRETE_FIXO > 0:
-        if FRETE_GRATIS_ACIMA > 0 and subtotal >= FRETE_GRATIS_ACIMA:
-            frete = 0.0  # frete grátis acima do threshold
-        else:
-            frete = FRETE_FIXO
-    if frete > 0:
-        mp_items.append({
-            "title": "Frete (envio PAC/SEDEX)",
-            "quantity": 1,
-            "unit_price": round(frete, 2),
-            "currency_id": "BRL",
-        })
-
-    base = SITE_URL or request.host_url.rstrip("/")
-    payload = {
-        "items": mp_items,
-        "statement_descriptor": "CLAU STUDIO",
-        "back_urls": {
-            "success": base + "/?status=success",
-            "failure": base + "/?status=failure",
-            "pending": base + "/?status=pending",
-        },
-        "auto_return": "approved",
-    }
-    headers = {
-        "Authorization": f"Bearer {MP_ACCESS_TOKEN}",
-        "Content-Type": "application/json",
-    }
     try:
+        if not MP_ACCESS_TOKEN or MP_ACCESS_TOKEN.startswith("TEST-0000"):
+            return jsonify(
+                {"error": "Mercado Pago ainda não configurado. Edite o .env com seu Access Token."}
+            ), 500
+        items = (request.get_json(force=True) or {}).get("items", [])
+        if not items:
+            return jsonify({"error": "carrinho vazio"}), 400
+
+        mp_items = [
+            {
+                "title": str(it.get("nome", ""))[:255],
+                "quantity": int(it["qtd"]),
+                "unit_price": float(it["preco"]),
+                "currency_id": "BRL",
+            }
+            for it in items
+        ]
+        # frete fixo como item no checkout (modo custom — não precisa de Mercado Envios/me2)
+        subtotal = sum(float(it["preco"]) * int(it["qtd"]) for it in items)
+        frete = 0.0
+        if FRETE_FIXO > 0:
+            if FRETE_GRATIS_ACIMA > 0 and subtotal >= FRETE_GRATIS_ACIMA:
+                frete = 0.0  # frete grátis acima do threshold
+            else:
+                frete = FRETE_FIXO
+        if frete > 0:
+            mp_items.append({
+                "title": "Frete (envio PAC/SEDEX)",
+                "quantity": 1,
+                "unit_price": round(frete, 2),
+                "currency_id": "BRL",
+            })
+
+        base = SITE_URL or request.host_url.rstrip("/")
+        payload = {
+            "items": mp_items,
+            "back_urls": {
+                "success": base + "/?status=success",
+                "failure": base + "/?status=failure",
+                "pending": base + "/?status=pending",
+            },
+            "auto_return": "approved",
+        }
+        headers = {
+            "Authorization": f"Bearer {MP_ACCESS_TOKEN}",
+            "Content-Type": "application/json",
+        }
         r = requests.post(
             "https://api.mercadopago.com/checkout/preferences",
             headers=headers, json=payload, timeout=20,
         )
-    except requests.RequestException as e:
-        return jsonify({"error": f"falha de conexão: {e}"}), 502
-    if r.status_code >= 400:
-        return jsonify({"error": "Mercado Pago: " + r.text}), 502
-    data = r.json()
-    return jsonify(
-        {
-            "init_point": data.get("init_point"),
-            "sandbox_init_point": data.get("sandbox_init_point"),
-        }
-    )
+        if r.status_code >= 400:
+            return jsonify({"error": "Mercado Pago: " + r.text}), 502
+        data = r.json()
+        return jsonify(
+            {
+                "init_point": data.get("init_point"),
+                "sandbox_init_point": data.get("sandbox_init_point"),
+            }
+        )
+    except Exception as e:
+        import traceback
+        return jsonify({"error": f"erro interno: {e}", "trace": traceback.format_exc()[-400:]}), 500
 
 
 if __name__ == "__main__":
