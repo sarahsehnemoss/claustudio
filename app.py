@@ -49,31 +49,53 @@ def save_pecas(pecas):
     )
 
 
+EXTS = {".jpg", ".jpeg", ".png", ".webp", ".gif"}
+
+
+def _limpar_nome(pasta):
+    """Converte nome de pasta em nome legível de produto."""
+    return pasta.strip()
+
+
 def scan_fotos():
-    """Garante que toda foto em FOTOS_DIR tenha uma entrada em pecas.json."""
-    exts = {".jpg", ".jpeg", ".png", ".webp", ".gif"}
+    """Cada pasta (em qualquer nível) que contenha fotos diretamente é um produto.
+    Pastas aninhadas viram produtos com nome composto ("pai — filho")."""
     pecas = load_pecas()
-    por_arquivo = {p["arquivo"]: p for p in pecas}
-    arquivos_no_disco = sorted(
-        f.name for f in FOTOS_DIR.iterdir() if f.suffix.lower() in exts
-    )
+    por_pasta = {p.get("pasta", ""): p for p in pecas if p.get("pasta")}
+
+    # descobre todas as pastas-produto (que têm fotos diretamente dentro)
+    produtos_no_disco = []
+    for dirpath, dirnames, filenames in os.walk(FOTOS_DIR):
+        dirnames.sort()  # ordem determinística
+        fotos = sorted(n for n in filenames if Path(n).suffix.lower() in EXTS)
+        if fotos:
+            rel = os.path.relpath(dirpath, FOTOS_DIR).replace("\\", "/")
+            produtos_no_disco.append((rel, fotos))
+    produtos_no_disco.sort(key=lambda x: x[0])
+
     alterado = False
-    # adiciona entradas para fotos novas
-    for i, nome in enumerate(arquivos_no_disco, 1):
-        if nome not in por_arquivo:
-            por_arquivo[nome] = {
+    for rel, fotos in produtos_no_disco:
+        if rel not in por_pasta:
+            nome = rel.replace("/", " — ")
+            por_pasta[rel] = {
                 "id": uuid.uuid4().hex[:8],
-                "arquivo": nome,
-                "nome": f"Peça {i:02d}",
+                "pasta": rel,
+                "nome": _limpar_nome(nome),
                 "categoria": "",
                 "descricao": "",
                 "preco": 0.0,
                 "estoque": 1,
-                "visivel": False,
+                "visivel": True,
+                "fotos": fotos,
             }
             alterado = True
-    # remove entradas de fotos que sumiram
-    final = [p for n, p in por_arquivo.items() if n in arquivos_no_disco]
+        else:
+            p = por_pasta[rel]
+            if p.get("fotos") != fotos:
+                p["fotos"] = fotos
+                alterado = True
+    validas = {rel for rel, _ in produtos_no_disco}
+    final = [por_pasta[r] for r in validas if r in por_pasta]
     if alterado or len(final) != len(pecas):
         save_pecas(final)
     return final
@@ -126,12 +148,18 @@ def update_peca(pid):
 
 
 @app.route("/foto/<pid>")
-def foto(pid):
+@app.route("/foto/<pid>/<int:idx>")
+def foto(pid, idx=0):
     for p in load_pecas():
         if p["id"] == pid:
-            caminho = FOTOS_DIR / p["arquivo"]
+            fotos = p.get("fotos") or []
+            if not fotos:
+                break
+            i = min(max(idx, 0), len(fotos) - 1)
+            caminho = FOTOS_DIR / p["pasta"] / fotos[i]
             if caminho.exists():
                 return send_file(caminho, mimetype="image/jpeg")
+            break
     abort(404)
 
 
@@ -158,7 +186,7 @@ def checkout():
     # Mercado Envios: frete automático (PAC/SEDEX) calculado no checkout pelo CEP do comprador.
     # dimensions no formato "altura x largura x comprimento, peso_gramas" (cm, g).
     dims = os.getenv("MP_DIMENSIONS", "20x20x20,1000")
-    payload = {
+    base_payload = {
         "items": mp_items,
         "statement_descriptor": "CLAUSTUDIO",
         "back_urls": {
@@ -167,34 +195,35 @@ def checkout():
             "pending": base + "/?status=pending",
         },
         "auto_return": "approved",
-        "shipments": {
-            "mode": "me2",
-            "dimensions": dims,
-        },
     }
-    try:
-        r = requests.post(
-            "https://api.mercadopago.com/checkout/preferences",
-            headers={
-                "Authorization": f"Bearer {MP_ACCESS_TOKEN}",
-                "Content-Type": "application/json",
-            },
-            json=payload,
-            timeout=20,
-        )
-    except requests.RequestException as e:
-        return jsonify({"error": f"falha de conexão: {e}"}), 502
-
-    if r.status_code >= 400:
-        return jsonify({"error": "Mercado Pago: " + r.text}), 502
-
-    data = r.json()
-    return jsonify(
-        {
-            "init_point": data.get("init_point"),
-            "sandbox_init_point": data.get("sandbox_init_point"),
-        }
-    )
+    # tenta com Mercado Envios (me2); se a conta não tiver me2 ativo, cai pra sem frete.
+    payloads = [
+        {**base_payload, "shipments": {"mode": "me2", "dimensions": dims}},
+        base_payload,  # fallback: sem frete (combinar entrega por WhatsApp)
+    ]
+    headers = {
+        "Authorization": f"Bearer {MP_ACCESS_TOKEN}",
+        "Content-Type": "application/json",
+    }
+    last_err = ""
+    for payload in payloads:
+        try:
+            r = requests.post(
+                "https://api.mercadopago.com/checkout/preferences",
+                headers=headers, json=payload, timeout=20,
+            )
+        except requests.RequestException as e:
+            return jsonify({"error": f"falha de conexão: {e}"}), 502
+        if r.status_code < 400:
+            data = r.json()
+            return jsonify(
+                {
+                    "init_point": data.get("init_point"),
+                    "sandbox_init_point": data.get("sandbox_init_point"),
+                }
+            )
+        last_err = r.text
+    return jsonify({"error": "Mercado Pago: " + last_err}), 502
 
 
 if __name__ == "__main__":
