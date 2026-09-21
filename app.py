@@ -313,6 +313,26 @@ def del_peca(pid):
     return jsonify({"error": "peça não encontrada"}), 404
 
 
+@app.route("/api/reseed", methods=["POST"])
+def reseed():
+    """Re-copia fotos e pecas.json do repo pro Volume (sobrescreve). Admin only."""
+    if not is_admin():
+        return jsonify({"error": "não autorizado"}), 401
+    if DATA_DIR == BASE:
+        return jsonify({"ok": True, "msg": "local, nada a fazer"})
+    repo_fotos = BASE / "Fotos.site"
+    repo_data = BASE / "pecas.json"
+    n = 0
+    if repo_fotos.exists():
+        if FOTOS_DIR.exists():
+            shutil.rmtree(FOTOS_DIR)
+        shutil.copytree(repo_fotos, FOTOS_DIR)
+        n = sum(1 for _ in FOTOS_DIR.rglob("*") if _.is_file())
+    if repo_data.exists():
+        shutil.copy2(repo_data, DATA_FILE)
+    return jsonify({"ok": True, "fotos": n, "msg": "volume re-sincronizado do repo"})
+
+
 @app.route("/foto/<pid>")
 @app.route("/foto/<pid>/<int:idx>")
 def foto(pid, idx=0):
