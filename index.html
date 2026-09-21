@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Clau Studio · Cerâmicas feitas à mão</title>
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 76 110'%3E%3Cpath fill='%232A2018' stroke='%232A2018' d='M30,4 L44,4 C45,4 46,5 45.5,7 L43,16 C52,20 60,30 60,44 L60,84 C60,96 51,106 38,106 C25,106 16,96 16,84 L16,44 C16,31 23,21 31.5,16.5 L29,7 C28.5,5 29,4 30,4 Z'/%3E%3Cpath fill='none' stroke='%232A2018' stroke-width='7' stroke-linecap='round' d='M58,40 C70,42 72,58 62,66'/%3E%3C/svg%3E">
-<meta name="theme-color" content="#FFFFFF">
+<meta name="theme-color" content="#FBF7F0">
 <meta name="description" content="Clau Studio — ateliê de cerâmica em Piçarras, SC. Peças autorais e únicas por Claudine Sehnem. Encomendas sob medida.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -16,7 +16,7 @@
     --line:#E8E0D4; --line-2:#F4EEE3;
   }
   *{box-sizing:border-box;margin:0;padding:0}
-  html{scroll-behavior:smooth}
+  html{scroll-behavior:smooth;background:var(--bg)}
   body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--ink);line-height:1.6;font-weight:400;-webkit-font-smoothing:antialiased}
   h1,h2,h3,h4{font-weight:300;letter-spacing:.01em}
   a{color:inherit;text-decoration:none}
@@ -38,6 +38,8 @@
   .btn-icone:hover{border-color:var(--ink)}
   .badge{position:absolute;top:-4px;right:-4px;background:var(--ink);color:#fff;font-size:10px;font-weight:500;min-width:18px;height:18px;border-radius:9px;display:grid;place-items:center;padding:0 5px}
   .acoes{display:flex;gap:10px;align-items:center}
+  .menu-toggle{display:none}
+  .menu-mobile{display:none}
 
   /* hero */
   .hero{padding:140px 0 120px;text-align:center}
@@ -239,23 +241,28 @@
     footer{padding:48px 0 36px}
     .logo.f{width:150px}
     .wrap{padding:0 16px}
-    .grid{grid-template-columns:repeat(2,1fr);gap:32px 12px}
+    .grid{grid-template-columns:repeat(2,1fr);gap:36px 12px}
     .card .corpo{padding:10px 0 0}
     .card h3{font-size:13px}
     .card .preco{font-size:13px}
     .card .mais{font-size:10px}
-    .hero{padding:48px 0 40px}
-    .hero h1{font-size:32px}
+    .hero{padding:56px 0 48px}
+    .hero h1{font-size:30px}
     .hero p{font-size:14px;margin-top:18px}
     .hero .linha{margin:28px auto 0}
     nav a{display:none}
     nav{gap:8px}
-    .logo.h{width:120px}
+    .logo.h{width:116px}
     .topo{height:56px}
-    .btn-icone{width:36px;height:36px;font-size:14px}
+    .btn-icone{width:40px;height:40px;font-size:15px}
+    .menu-toggle{display:grid}
+    .menu-mobile{position:absolute;top:56px;left:0;right:0;background:#fff;border-bottom:1px solid var(--line);padding:8px 16px 14px;display:none;flex-direction:column;gap:2px;box-shadow:0 12px 24px -16px rgba(0,0,0,.18);z-index:39}
+    .menu-mobile.aberto{display:flex}
+    .menu-mobile a{padding:12px 4px;font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink);border-bottom:1px solid var(--line-2)}
+    .menu-mobile a:last-child{border-bottom:none}
     .filtros{gap:20px;overflow-x:auto;flex-wrap:nowrap;-webkit-overflow-scrolling:touch;margin:0 0 28px;padding-bottom:8px}
     .filtros::-webkit-scrollbar{display:none}
-    .chip{font-size:12px;white-space:nowrap;padding:8px 0}
+    .chip{font-size:12px;white-space:nowrap;padding:12px 0}
     .sobre{padding:56px 0}
     .sobre p{font-size:15px}
     .sobmedida{padding:56px 0}
@@ -264,20 +271,35 @@
     .cat-secao .cat-titulo{font-size:20px;margin-bottom:20px}
     .toolbar{margin-bottom:28px}
     .toolbar .cont{font-size:11px}
-    .toolbar .sort select{font-size:11px}
-    .modal{gap:20px}
+    .toolbar .sort select{font-size:12px;padding:8px 10px}
+    .modal-fundo{padding:0}
+    .modal{gap:20px;padding:56px 16px 32px}
     .modal .det h2{font-size:24px}
     .modal .det .preco{font-size:18px}
     .modal .det p{font-size:14px}
+    .modal .det .add-grande{max-width:none;width:100%;padding:15px 20px;font-size:13px}
     .modal .thumbs button{width:48px;height:48px}
+    .fechar{top:14px;right:14px;width:40px;height:40px;font-size:20px}
     .acards{grid-template-columns:1fr}
-    .admin{padding:16px}
+    .admin{padding:18px 16px}
+    .admin .fechar-admin{font-size:22px}
     .gaveta{width:100vw}
-    .gaveta .cabecalho{padding:20px}
-    .gaveta .itens{padding:8px 20px}
-    .gaveta .rodape{padding:20px}
-    .wabot{width:48px;height:48px;bottom:20px;right:20px}
-    .wabot svg{height:26px}
+    .gaveta .cabecalho{padding:18px 18px 16px}
+    .gaveta .itens{padding:8px 18px}
+    .gaveta .rodape{padding:18px}
+    .item img{width:64px;height:64px}
+    .wabot{width:52px;height:52px;bottom:20px;right:18px}
+    .wabot svg{height:28px}
+    .destaque .det .ver{max-width:none;width:100%}
+    .cta-wpp{padding:15px 28px}
+  }
+  @media(max-width:380px){
+    .grid{grid-template-columns:1fr;gap:36px 0}
+    .hero h1{font-size:26px}
+    .logo.h{width:104px}
+    .btn-icone{width:38px;height:38px;font-size:14px}
+    .card h3{font-size:14px}
+    .card .preco{font-size:14px}
   }
 </style>
 </head>
@@ -300,10 +322,17 @@
       <a href="#sobre">Sobre</a>
       <a href="#contato">Contato</a>
       <div class="acoes">
+        <button class="btn-icone menu-toggle" onclick="toggleMenu()" title="Menu" aria-label="Menu">☰</button>
         <button class="btn-icone" onclick="abrirAdmin()" title="Admin">⚙</button>
         <button class="btn-icone" onclick="abrirGaveta()" title="Carrinho">🛒<span class="badge" id="badge" style="display:none">0</span></button>
       </div>
     </nav>
+  </div>
+  <div class="menu-mobile" id="menuMobile">
+    <a href="#catalogo" onclick="toggleMenu()">Catálogo</a>
+    <a href="#sobmedida" onclick="toggleMenu()">Sob medida</a>
+    <a href="#sobre" onclick="toggleMenu()">Sobre</a>
+    <a href="#contato" onclick="toggleMenu()">Contato</a>
   </div>
 </header>
 
@@ -436,6 +465,13 @@ const toast = (m) => { const t=document.getElementById("toast"); t.textContent=m
 const hdr = document.querySelector("header");
 const syncHdr = () => hdr.classList.toggle("solid", window.scrollY > 40);
 window.addEventListener("scroll", syncHdr, {passive:true}); syncHdr();
+
+// menu mobile
+function toggleMenu(){
+  const m = document.getElementById("menuMobile");
+  m.classList.toggle("aberto");
+  if(m.classList.contains("aberto")) hdr.classList.add("solid");
+}
 
 async function carregar(){
   const r = await fetch(API + "/api/pecas");
