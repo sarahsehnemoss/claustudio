@@ -45,11 +45,11 @@
   .hero p{max-width:520px;margin:28px auto 0;color:var(--soft);font-size:16px;font-weight:300;line-height:1.7}
   .hero .linha{width:1px;height:48px;background:var(--line);margin:48px auto 0}
 
-  /* filtros */
-  .filtros{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin:0 0 64px}
-  .chip{padding:7px 16px;border:1px solid var(--line);border-radius:999px;background:transparent;font-size:12px;font-weight:400;color:var(--soft);cursor:pointer;transition:.2s;letter-spacing:.04em}
-  .chip:hover{border-color:var(--ink);color:var(--ink)}
-  .chip.ativo{background:var(--ink);color:#fff;border-color:var(--ink)}
+  /* filtros (abas) */
+  .filtros{display:flex;flex-wrap:wrap;gap:28px;justify-content:flex-start;margin:0 0 48px;border-bottom:1px solid var(--line)}
+  .chip{padding:10px 2px;border:none;border-bottom:2px solid transparent;border-radius:0;background:transparent;font-size:13px;font-weight:400;color:var(--soft);cursor:pointer;transition:.2s;letter-spacing:.06em;text-transform:uppercase;font-family:inherit}
+  .chip:hover{color:var(--ink)}
+  .chip.ativo{color:var(--ink);border-bottom-color:var(--ink);font-weight:500}
 
   /* grid */
   .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:64px 40px;padding:0 0 24px}
@@ -211,7 +211,7 @@
   .wabot{position:fixed;bottom:28px;right:28px;width:56px;height:56px;border-radius:50%;background:#25D366;display:grid;place-items:center;cursor:pointer;z-index:85;box-shadow:0 8px 24px -8px rgba(37,211,102,.6);transition:transform .2s}
   .wabot:hover{transform:scale(1.06)}
   .wabot svg{height:30px;width:auto;fill:#fff}
-  .wabot::after{content:"Fale conosco";position:absolute;right:68px;top:50%;transform:translateY(-50%);background:var(--ink);color:#fff;font-size:12px;padding:8px 14px;border-radius:4px;white-space:nowrap;opacity:0;pointer-events:none;transition:opacity .2s;letter-spacing:.04em}
+  .wabot::after{content:"Fale com a Clau";position:absolute;right:68px;top:50%;transform:translateY(-50%);background:var(--ink);color:#fff;font-size:12px;padding:8px 14px;border-radius:4px;white-space:nowrap;opacity:0;pointer-events:none;transition:opacity .2s;letter-spacing:.04em}
   .wabot:hover::after{opacity:1}
   @media(max-width:700px){.wabot::after{display:none}}
 
@@ -265,11 +265,11 @@
 <header>
   <div class="wrap topo">
     <a href="#" class="marca" aria-label="Clau Studio">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 80" class="logo h" role="img" aria-label="Clau Studio">
-        <g transform="translate(8,8) scale(0.52)" fill="#4A3528" stroke="#4A3528"><path d="M30,4 L44,4 C45,4 46,5 45.5,7 L43,16 C52,20 60,30 60,44 L60,84 C60,96 51,106 38,106 C25,106 16,96 16,84 L16,44 C16,31 23,21 31.5,16.5 L29,7 C28.5,5 29,4 30,4 Z"/><path fill="none" stroke-width="7" stroke-linecap="round" d="M58,40 C70,42 72,58 62,66"/></g>
-        <text x="125" y="50" text-anchor="middle" font-family="'Cormorant', Georgia, serif" font-weight="500" font-size="38" letter-spacing="7" fill="#4A3528">CLAU</text>
-        <circle cx="172" cy="37" r="3.2" fill="#4A3528"/>
-        <text x="225" y="50" text-anchor="middle" font-family="'Cormorant', Georgia, serif" font-weight="500" font-size="38" letter-spacing="7" fill="#4A3528">STUDIO</text>
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 80" class="logo h" role="img" aria-label="Clau Studio">
+        <g transform="translate(6,12) scale(0.42)" fill="#4A3528" stroke="#4A3528"><path d="M14,12 C14,9 16,7 19,7 L51,7 C54,7 56,9 56,12 L52,78 C51.4,85 45,91 37,91 L33,91 C25,91 18.6,85 18,78 Z"/><path fill="none" stroke-width="7" stroke-linecap="round" d="M54,26 C67,26 67,50 54,50"/></g>
+        <text x="105" y="50" text-anchor="middle" font-family="'Cormorant', Georgia, serif" font-weight="500" font-size="34" letter-spacing="6" fill="#4A3528">CLAU</text>
+        <circle cx="150" cy="37" r="2.8" fill="#4A3528"/>
+        <text x="200" y="50" text-anchor="middle" font-family="'Cormorant', Georgia, serif" font-weight="500" font-size="34" letter-spacing="6" fill="#4A3528">STUDIO</text>
       </svg>
     </a>
     <nav>
