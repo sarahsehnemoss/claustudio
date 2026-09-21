@@ -29,7 +29,7 @@
   .topo{display:flex;align-items:center;justify-content:space-between;height:80px}
   .marca{font-size:15px;font-weight:500;letter-spacing:.28em;text-transform:uppercase;color:var(--ink)}
   .logo{display:block;height:auto}
-  .logo.h{width:190px}
+  .logo.h{width:220px}
   .logo.f{width:220px}
   nav{display:flex;gap:36px;align-items:center}
   nav a{font-size:12px;font-weight:400;color:var(--soft);transition:.2s;letter-spacing:.14em;text-transform:uppercase}
@@ -210,7 +210,7 @@
   /* balão WhatsApp flutuante */
   .wabot{position:fixed;bottom:28px;right:28px;width:56px;height:56px;border-radius:50%;background:#25D366;display:grid;place-items:center;cursor:pointer;z-index:85;box-shadow:0 8px 24px -8px rgba(37,211,102,.6);transition:transform .2s}
   .wabot:hover{transform:scale(1.06)}
-  .wabot svg{width:30px;height:30px;fill:#fff}
+  .wabot svg{height:30px;width:auto;fill:#fff}
   .wabot::after{content:"Fale conosco";position:absolute;right:68px;top:50%;transform:translateY(-50%);background:var(--ink);color:#fff;font-size:12px;padding:8px 14px;border-radius:4px;white-space:nowrap;opacity:0;pointer-events:none;transition:opacity .2s;letter-spacing:.04em}
   .wabot:hover::after{opacity:1}
   @media(max-width:700px){.wabot::after{display:none}}
@@ -265,10 +265,11 @@
 <header>
   <div class="wrap topo">
     <a href="#" class="marca" aria-label="Clau Studio">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 590 90" class="logo h" role="img" aria-label="Clau Studio">
-        <text x="96" y="62" text-anchor="middle" font-family="'Cormorant', Georgia, serif" font-weight="500" font-size="54" letter-spacing="10" fill="#4A3528">CLAU</text>
-        <circle cx="251" cy="43" r="4.5" fill="#4A3528"/>
-        <text x="441" y="62" text-anchor="middle" font-family="'Cormorant', Georgia, serif" font-weight="500" font-size="54" letter-spacing="10" fill="#4A3528">STUDIO</text>
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 80" class="logo h" role="img" aria-label="Clau Studio">
+        <g transform="translate(8,8) scale(0.52)" fill="#4A3528" stroke="#4A3528"><path d="M30,4 L44,4 C45,4 46,5 45.5,7 L43,16 C52,20 60,30 60,44 L60,84 C60,96 51,106 38,106 C25,106 16,96 16,84 L16,44 C16,31 23,21 31.5,16.5 L29,7 C28.5,5 29,4 30,4 Z"/><path fill="none" stroke-width="7" stroke-linecap="round" d="M58,40 C70,42 72,58 62,66"/></g>
+        <text x="125" y="50" text-anchor="middle" font-family="'Cormorant', Georgia, serif" font-weight="500" font-size="38" letter-spacing="7" fill="#4A3528">CLAU</text>
+        <circle cx="172" cy="37" r="3.2" fill="#4A3528"/>
+        <text x="225" y="50" text-anchor="middle" font-family="'Cormorant', Georgia, serif" font-weight="500" font-size="38" letter-spacing="7" fill="#4A3528">STUDIO</text>
       </svg>
     </a>
     <nav>
@@ -390,7 +391,7 @@
 
 <!-- balão WhatsApp -->
 <a class="wabot" href="https://wa.me/5547991084140?text=Olá!%20Vim%20pelo%20site%20da%20Clau%20Studio" target="_blank" aria-label="Falar no WhatsApp">
-  <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#fff" d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91C21.95 6.45 17.5 2 12.04 2zm0 18.15c-1.48 0-2.93-.4-4.19-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.2 8.2 0 0 1-1.26-4.38c0-4.54 3.7-8.23 8.24-8.23 2.2 0 4.27.86 5.82 2.42a8.18 8.18 0 0 1 2.42 5.82c0 4.54-3.7 8.23-8.24 8.23zm4.52-6.16c-.25-.12-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.13-.16.24-.64.81-.78.97-.14.16-.29.18-.54.06-.25-.12-1.05-.39-2-1.23-.74-.66-1.24-1.47-1.38-1.72-.14-.25-.02-.39.11-.51.11-.11.25-.29.37-.43.12-.14.16-.25.08-.41-.08-.16-.37-.89-.51-1.22-.13-.31-.27-.27-.37-.27-.1 0-.2.01-.31.01-.11 0-.29.04-.44.25-.16.21-.6.83-.6 1.62 0 .79.58 1.55.66 1.66.08.11 1.13 1.72 2.74 2.42.38.17.68.27.92.35.39.12.74.1 1.02.06.31-.05.95-.39 1.08-.76.13-.37.13-.69.09-.76-.04-.06-.16-.1-.41-.22z"/></svg>
+  <svg viewBox="0 0 448 512" aria-hidden="true"><path fill="#fff" d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.8-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-32.7 0-64.7-8.8-92.8-25.5l-6.6-3.9-68.2 17.9 18.2-66.5-4.3-6.7c-18.5-29.4-28.2-63.6-28.2-98.6 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.7-3.2 3.7-6.5 4.2-12 1.4-32.6-16.3-54-29.1-75.5-66-5.7-9.8 5.7-9.1 16.3-30.3 1.8-3.7.9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 35.2 15.2 49 16.5 66.6 13.9 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.2 3.2-26.4-1.3-2.3-5-3.7-10.7-6.6z"/></svg>
 </a>
 
 <!-- lightbox -->
