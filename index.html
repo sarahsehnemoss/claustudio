@@ -235,26 +235,50 @@
   footer .ft-marca{font-size:14px;font-weight:500;letter-spacing:.28em;text-transform:uppercase;color:var(--ink);margin-bottom:14px}
   footer .ft-base{max-width:1280px;margin:48px auto 0;padding:20px 32px 0;border-top:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;font-size:11px;color:var(--faint);letter-spacing:.04em}
   @media(max-width:700px){
-    footer .ft-wrap{grid-template-columns:1fr;gap:32px}
+    footer .ft-wrap{grid-template-columns:1fr;gap:28px}
     footer .ft-base{flex-direction:column;gap:10px;text-align:center}
-    .wrap{padding:0 18px}
-    .grid{grid-template-columns:1fr;gap:48px}
-    .hero{padding:70px 0 60px}
-    .hero h1{font-size:38px}
-    .hero p{font-size:15px}
-    /* header: esconde links de texto, deixa só logo + icons */
+    footer{padding:48px 0 36px}
+    .logo.f{width:150px}
+    .wrap{padding:0 16px}
+    .grid{grid-template-columns:repeat(2,1fr);gap:32px 12px}
+    .card .corpo{padding:10px 0 0}
+    .card h3{font-size:13px}
+    .card .preco{font-size:13px}
+    .card .mais{font-size:10px}
+    .hero{padding:48px 0 40px}
+    .hero h1{font-size:32px}
+    .hero p{font-size:14px;margin-top:18px}
+    .hero .linha{margin:28px auto 0}
     nav a{display:none}
-    nav{gap:10px}
-    .logo.h{width:140px}
-    .topo{height:64px}
-    .sobre{padding:70px 0}
-    .sobmedida{padding:70px 0}
-    .cat-secao{padding:0 0 56px}
-    .cat-secao .cat-titulo{font-size:24px;margin-bottom:24px}
-    .toolbar{flex-direction:column;gap:12px;align-items:flex-start}
+    nav{gap:8px}
+    .logo.h{width:120px}
+    .topo{height:56px}
+    .btn-icone{width:36px;height:36px;font-size:14px}
+    .filtros{gap:20px;overflow-x:auto;flex-wrap:nowrap;-webkit-overflow-scrolling:touch;margin:0 0 28px;padding-bottom:8px}
+    .filtros::-webkit-scrollbar{display:none}
+    .chip{font-size:12px;white-space:nowrap;padding:8px 0}
+    .sobre{padding:56px 0}
+    .sobre p{font-size:15px}
+    .sobmedida{padding:56px 0}
+    .sobmedida p{font-size:15px}
+    .cat-secao{padding:0 0 48px}
+    .cat-secao .cat-titulo{font-size:20px;margin-bottom:20px}
+    .toolbar{margin-bottom:28px}
+    .toolbar .cont{font-size:11px}
+    .toolbar .sort select{font-size:11px}
+    .modal{gap:20px}
+    .modal .det h2{font-size:24px}
+    .modal .det .preco{font-size:18px}
+    .modal .det p{font-size:14px}
+    .modal .thumbs button{width:48px;height:48px}
     .acards{grid-template-columns:1fr}
-    .admin{padding:20px}
+    .admin{padding:16px}
     .gaveta{width:100vw}
+    .gaveta .cabecalho{padding:20px}
+    .gaveta .itens{padding:8px 20px}
+    .gaveta .rodape{padding:20px}
+    .wabot{width:48px;height:48px;bottom:20px;right:20px}
+    .wabot svg{height:26px}
   }
 </style>
 </head>
