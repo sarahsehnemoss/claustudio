@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 300">
+  <g transform="translate(120,75) scale(0.525)" fill="#F6EFE3" stroke="#F6EFE3">
+    <path d="M30,4 L44,4 C45,4 46,5 45.5,7 L43,16 C52,20 60,30 60,44 L60,84 C60,96 51,106 38,106 C25,106 16,96 16,84 L16,44 C16,31 23,21 31.5,16.5 L29,7 C28.5,5 29,4 30,4 Z"/>
+    <path fill="none" stroke-width="7" stroke-linecap="round" d="M58,40 C70,42 72,58 62,66"/>
+  </g>
+  <g transform="translate(188,89) scale(0.474)" fill="#F6EFE3" stroke="#F6EFE3">
+    <path d="M14,12 C14,9 16,7 19,7 L51,7 C54,7 56,9 56,12 L52,78 C51.4,85 45,91 37,91 L33,91 C25,91 18.6,85 18,78 Z"/>
+    <path fill="none" stroke-width="7" stroke-linecap="round" d="M54,26 C67,26 67,50 54,50"/>
+  </g>
+  <g transform="translate(250,98) scale(0.48)" fill="#F6EFE3">
+    <path d="M6,20 C6,17 8,15 11,15.5 L93,15.5 C96,15 98,17 98,20 C98,42 80,58 52,58 C24,58 6,42 6,20 Z"/>
+    <path d="M40,58 L64,58 L60,70 C59,72.5 57,74 52,74 C47,74 45,72.5 44,70 Z"/>
+  </g>
+  <rect x="150" y="159.5" width="120" height="1" fill="#F6EFE3" opacity="0.35"/>
+  <g transform="translate(80,186) scale(0.4407)">
+    <text x="96" y="62" text-anchor="middle" font-family="'Cormorant', Georgia, serif" font-weight="500" font-size="54" letter-spacing="10" fill="#F6EFE3">CLAU</text>
+    <circle cx="251" cy="43" r="4.5" fill="#F6EFE3"/>
+    <text x="441" y="62" text-anchor="middle" font-family="'Cormorant', Georgia, serif" font-weight="500" font-size="54" letter-spacing="10" fill="#F6EFE3">STUDIO</text>
+  </g>
+</svg>
